@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Dashboard Links - Professional v6</title>
+<title>Dashboard Links - v7 (Admin PIN)</title>
 
 <!-- SheetJS for Excel Import/Export -->
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
@@ -26,97 +26,50 @@
     background:var(--bg);
     color:var(--text);
   }
-  header{
-    max-width:1150px;margin:0 auto 22px;
-    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;
-  }
+  header{max-width:1150px;margin:0 auto 22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
   .brand{display:flex;gap:12px;align-items:center}
-  .logo{
-    width:52px;height:52px;border-radius:12px;
-    background:linear-gradient(135deg,var(--primary),var(--primary-dark));
-    display:flex;align-items:center;justify-content:center;
-    color:#fff;font-weight:700;font-size:22px;
-  }
+  .logo{width:52px;height:52px;border-radius:12px;background:linear-gradient(135deg,var(--primary),var(--primary-dark));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:22px}
   .title{font-weight:700;font-size:18px}
   .muted{font-size:12px;color:var(--muted)}
   .left-controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:10px}
   input.search{padding:9px 12px;border-radius:10px;border:1px solid var(--border);width:240px}
   select{padding:9px;border-radius:10px;border:1px solid var(--border)}
   .controls{display:flex;gap:8px}
-  button{
-    padding:9px 12px;border-radius:10px;
-    border:1px solid var(--border);cursor:pointer;
-    font-weight:600;background:#fff;color:var(--primary-dark);
-  }
+  button{padding:9px 12px;border-radius:10px;border:1px solid var(--border);cursor:pointer;font-weight:600;background:#fff;color:var(--primary-dark)}
   .btn-primary{background:var(--primary);color:#fff;border:0}
   .btn-danger{background:#c0392b;color:#fff;border:0}
-
-  main{max-width:1150px;margin:0 auto;}
-
-  .category-row{
-    margin-top:22px;padding:2px;border-radius:12px;
-    transition:.12s;background:transparent;
-  }
+  .small{padding:7px 9px}
+  .readonly-note{font-size:13px;color:var(--muted);margin-left:10px}
+  main{max-width:1150px;margin:0 auto}
+  .category-row{margin-top:22px;padding:2px;border-radius:12px;transition:.12s;background:transparent}
   .category-row.drag-over{background:#e6f3ff}
-
   .category-header{display:flex;gap:12px;align-items:center}
-  .cat-icon{
-    width:46px;height:46px;border-radius:10px;
-    background:#eaf3fc;display:flex;align-items:center;justify-content:center;
-    font-size:20px;
-  }
+  .cat-icon{width:46px;height:46px;border-radius:10px;background:#eaf3fc;display:flex;align-items:center;justify-content:center;font-size:20px}
   .cat-title{font-size:18px;font-weight:700}
-
-  .cards{
-    display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));
-    gap:12px;margin-top:12px;padding:4px;
-  }
-
-  .card{
-    background:#fff;border:1px solid var(--border);
-    border-radius:12px;padding:14px;min-height:90px;
-    box-shadow:0 4px 12px rgba(0,0,0,0.05);
-    cursor:grab;user-select:none;transition:.12s;
-    display:flex;flex-direction:column;gap:6px;
-  }
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:12px;margin-top:12px;padding:4px}
+  .card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px;min-height:90px;box-shadow:0 4px 12px rgba(0,0,0,0.05);cursor:grab;user-select:none;transition:.12s;display:flex;flex-direction:column;gap:6px}
   .card:hover{transform:translateY(-4px)}
   .card.dragging{opacity:0.5}
-
   .card-title{font-weight:700}
-  .card-url{
-    font-size:13px;color:var(--muted);
-    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-  }
-
-  /* Add card (show only if category has links) */
-  .add-card{
-    background:#eef5ff;border:2px dashed var(--primary);
-    display:flex;align-items:center;justify-content:center;
-    font-size:32px;border-radius:12px;cursor:pointer;
-  }
-
-  /* Modal */
-  .modal-backdrop{
-    position:fixed;inset:0;background:rgba(0,0,0,0.45);
-    display:none;align-items:center;justify-content:center;padding:20px;z-index:999;
-  }
-  .modal{
-    background:#fff;padding:18px;border-radius:12px;width:420px;max-width:100%;
-  }
+  .card-url{font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .add-card{background:#eef5ff;border:2px dashed var(--primary);display:flex;align-items:center;justify-content:center;font-size:32px;border-radius:12px;cursor:pointer}
+  .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.45);display:none;align-items:center;justify-content:center;padding:20px;z-index:999}
+  .modal{background:#fff;padding:18px;border-radius:12px;width:420px;max-width:100%}
   .row{display:flex;justify-content:flex-end;gap:10px;margin-top:14px}
   input,select{margin-top:6px;width:100%;padding:10px;border-radius:8px;border:1px solid var(--border)}
-
+  .pin-input{letter-spacing:8px;font-size:20px;text-align:center;max-width:220px}
+  .status-badge{font-size:13px;padding:6px 10px;border-radius:10px;border:1px solid rgba(0,0,0,0.06);background:#fff}
+  @media(max-width:640px){ .cards{grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); } .left-controls{width:100%;margin-top:12px;display:flex;justify-content:space-between} }
 </style>
 </head>
-
 <body>
 
 <header>
   <div class="brand">
     <div class="logo">DL</div>
     <div>
-      <div class="title">Dashboard Links – v6</div>
-      <div class="muted">Professional Edition</div>
+      <div class="title">Dashboard Links – v7</div>
+      <div class="muted">Public Read-only + Admin (PIN)</div>
     </div>
   </div>
 
@@ -131,12 +84,17 @@
     </select>
   </div>
 
-  <div class="controls">
-    <button id="btnAddCategory">+ Add Category</button>
-    <button class="btn-primary" id="btnAddLink">+ Add Link</button>
-    <button id="btnDelete">🗑 Delete</button>
-    <button id="btnExport">📤 Export</button>
-    <button id="btnImport">📥 Import</button>
+  <div class="controls" id="controlsTop">
+    <!-- Buttons shown only for admin -->
+    <button id="btnAddCategory" style="display:none">+ Add Category</button>
+    <button class="btn-primary" id="btnAddLink" style="display:none">+ Add Link</button>
+    <button id="btnDelete" style="display:none">🗑 Delete</button>
+    <button id="btnExport" style="display:none">📤 Export</button>
+    <button id="btnImport" style="display:none">📥 Import</button>
+
+    <!-- Admin login / logout controls -->
+    <button id="btnAdminToggle">🔒 Admin Login</button>
+    <div id="adminStatus" class="status-badge" style="display:none;margin-left:8px">Admin</div>
   </div>
 </header>
 
@@ -146,10 +104,19 @@
 <div class="modal-backdrop" id="modalBackdrop"><div class="modal" id="modalContent"></div></div>
 
 <script>
-/* Storage */
-const CATS_KEY="cats_v6";
-const LINKS_KEY="links_v6";
+/* ========== CONFIG ========== */
+/* Default 6-digit PIN - change here if needed */
+const ADMIN_PIN = "123456";
 
+/* Auto-lock timeout (ms) */
+const AUTO_LOCK_MS = 5 * 60 * 1000; // 5 minutes
+
+/* Storage keys */
+const CATS_KEY = "cats_v7";
+const LINKS_KEY = "links_v7";
+const SESSION_KEY = "dash_admin_session_v7";
+
+/* ========== DATA (initial) ========== */
 let categories = JSON.parse(localStorage.getItem(CATS_KEY)) || [
   {id:"c1",name:"HR"},
   {id:"c2",name:"Production"},
@@ -159,17 +126,91 @@ let categories = JSON.parse(localStorage.getItem(CATS_KEY)) || [
 ];
 let links = JSON.parse(localStorage.getItem(LINKS_KEY)) || [];
 
-const save = ()=>{ localStorage.setItem(CATS_KEY,JSON.stringify(categories)); localStorage.setItem(LINKS_KEY,JSON.stringify(links)); };
-const uid=()=> "id"+Math.random().toString(36).slice(2);
-const icon=cat=>({HR:"👨‍💼",Production:"🏭",Finance:"💰",IT:"💻",Admin:"🏢"}[cat]||"🔗");
+/* Save helper */
+const saveAll = ()=>{ localStorage.setItem(CATS_KEY, JSON.stringify(categories)); localStorage.setItem(LINKS_KEY, JSON.stringify(links)); };
 
-const main=document.getElementById("mainArea");
-const search=document.getElementById("searchBox");
-const sort=document.getElementById("catSort");
+/* UID */
+const uid = ()=> "id"+Math.random().toString(36).slice(2,9);
 
-/* Sorting */
+/* Icons */
+const icon = (cat)=> ({HR:"👨‍💼",Production:"🏭",Finance:"💰",IT:"💻",Admin:"🏢"}[cat] || "🔗");
+
+/* DOM refs */
+const main = document.getElementById("mainArea");
+const searchBox = document.getElementById("searchBox");
+const catSort = document.getElementById("catSort");
+const btnAdminToggle = document.getElementById("btnAdminToggle");
+const adminStatus = document.getElementById("adminStatus");
+
+/* Admin controls refs */
+const ctrlIDs = ["btnAddCategory","btnAddLink","btnDelete","btnExport","btnImport"];
+
+function isAdmin(){
+  try{
+    const s = JSON.parse(sessionStorage.getItem(SESSION_KEY));
+    return s && s.auth === true;
+  } catch(e){ return false; }
+}
+
+/* Update admin UI: show/hide controls based on admin state */
+function updateAdminUI(){
+  const admin = isAdmin();
+  ctrlIDs.forEach(id=>{
+    const el = document.getElementById(id);
+    if(!el) return;
+    el.style.display = admin ? "" : "none";
+  });
+  btnAdminToggle.textContent = admin ? "🔓 Logout" : "🔒 Admin Login";
+  adminStatus.style.display = admin ? "" : "none";
+}
+
+/* Session management & auto-lock */
+let activityTimerInterval = null;
+function startAdminSession(){
+  const payload = { auth: true, lastActivity: Date.now() };
+  sessionStorage.setItem(SESSION_KEY, JSON.stringify(payload));
+  updateAdminUI();
+  setupActivityWatcher();
+}
+function endAdminSession(){
+  sessionStorage.removeItem(SESSION_KEY);
+  updateAdminUI();
+  stopActivityWatcher();
+}
+function refreshSessionActivity(){
+  const s = JSON.parse(sessionStorage.getItem(SESSION_KEY) || "{}");
+  if(s && s.auth){
+    s.lastActivity = Date.now();
+    sessionStorage.setItem(SESSION_KEY, JSON.stringify(s));
+  }
+}
+function setupActivityWatcher(){
+  stopActivityWatcher();
+  activityTimerInterval = setInterval(()=>{
+    const s = JSON.parse(sessionStorage.getItem(SESSION_KEY) || "{}");
+    if(!s || !s.auth){ stopActivityWatcher(); return; }
+    if(Date.now() - (s.lastActivity || 0) > AUTO_LOCK_MS){
+      alert("Session locked due to inactivity (5 minutes). Please login again.");
+      endAdminSession();
+      render();
+    }
+  }, 5000);
+  /* also update last activity on user actions */
+  window.addEventListener("mousemove", refreshSessionActivity);
+  window.addEventListener("keydown", refreshSessionActivity);
+  window.addEventListener("click", refreshSessionActivity);
+}
+function stopActivityWatcher(){
+  if(activityTimerInterval) clearInterval(activityTimerInterval);
+  activityTimerInterval = null;
+  window.removeEventListener("mousemove", refreshSessionActivity);
+  window.removeEventListener("keydown", refreshSessionActivity);
+  window.removeEventListener("click", refreshSessionActivity);
+}
+
+/* ========== RENDER & BEHAVIOR ========= */
 function applySort(cats){
-  const mode=sort.value;
+  const mode = catSort.value;
   if(mode==="alpha") return [...cats].sort((a,b)=>a.name.localeCompare(b.name));
   if(mode==="alpha-desc") return [...cats].sort((a,b)=>b.name.localeCompare(a.name));
   if(mode==="most") return [...cats].sort((a,b)=>links.filter(l=>l.category==b.id).length - links.filter(l=>l.category==a.id).length);
@@ -177,227 +218,309 @@ function applySort(cats){
   return cats;
 }
 
-/* Render */
 function render(){
-  const q=(search.value||"").toLowerCase();
-  main.innerHTML="";
-  const cats=applySort(categories);
+  updateAdminUI();
+  const q = (searchBox.value || "").trim().toLowerCase();
+  main.innerHTML = "";
+  const cats = applySort(categories);
 
   cats.forEach(cat=>{
-    const row=document.createElement("div");
-    row.className="category-row";
-    row.draggable=true;
-    row.dataset.id=cat.id;
+    const row = document.createElement("div");
+    row.className = "category-row";
+    row.dataset.catId = cat.id;
 
-    /* Drag category */
-    row.addEventListener("dragstart",e=>{
-      e.dataTransfer.setData("text/plain",JSON.stringify({type:"cat",id:cat.id}));
-      row.style.opacity="0.5";
-    });
-    row.addEventListener("dragend",()=> row.style.opacity="1");
+    const header = document.createElement("div");
+    header.className = "category-header";
+    header.innerHTML = `<div class="cat-icon">${icon(cat.name)}</div>
+                        <div>
+                          <div class="cat-title">${cat.name}</div>
+                          <div class="muted">${links.filter(l=>l.category==cat.id).length} links</div>
+                        </div>`;
+    row.appendChild(header);
 
-    /* Drop category */
-    row.addEventListener("dragover",e=>{ e.preventDefault(); row.classList.add("drag-over"); });
-    row.addEventListener("dragleave",()=> row.classList.remove("drag-over"));
-    row.addEventListener("drop",e=>{
-      row.classList.remove("drag-over");
-      const data=JSON.parse(e.dataTransfer.getData("text/plain")||"{}");
-      if(data.type==="cat" && data.id!==cat.id){
-        const from=categories.findIndex(c=>c.id===data.id);
-        const to=categories.findIndex(c=>c.id===cat.id);
-        const moved=categories.splice(from,1)[0];
-        categories.splice(to,0,moved);
-        save(); render();
-      }
-    });
+    const cards = document.createElement("div");
+    cards.className = "cards";
+    cards.dataset.cat = cat.id;
 
-    /* Header */
-    row.innerHTML=`
-      <div class="category-header">
-        <div class="cat-icon">${icon(cat.name)}</div>
-        <div>
-          <div class="cat-title">${cat.name}</div>
-          <div class="muted">${links.filter(l=>l.category==cat.id).length} links</div>
-        </div>
-      </div>
-    `;
+    /* If admin -> allow drag/drop; else not draggable */
+    const admin = isAdmin();
 
-    const cards=document.createElement("div");
-    cards.className="cards";
-    cards.dataset.cat=cat.id;
+    /* card drop handlers (only used when admin) */
+    if(admin){
+      cards.addEventListener("dragover", e=>{ e.preventDefault(); cards.classList.add("drag-over"); });
+      cards.addEventListener("dragleave", ()=> cards.classList.remove("drag-over"));
+      cards.addEventListener("drop", e=>{
+        cards.classList.remove("drag-over");
+        try {
+          const data = JSON.parse(e.dataTransfer.getData("text/plain") || "{}");
+          if(data.type === "card"){
+            // move card to this category (append)
+            links = links.filter(l=>l.id !== data.id);
+            links.push({...data.payload, category: cat.id});
+            saveAll(); render();
+          }
+          if(data.type === "cat"){
+            const fromIndex = categories.findIndex(c=>c.id === data.id);
+            const toIndex = categories.findIndex(c=>c.id === cat.id);
+            if(fromIndex >= 0 && toIndex >= 0 && data.id !== cat.id){
+              const [moved] = categories.splice(fromIndex,1);
+              categories.splice(toIndex,0,moved);
+              saveAll(); render();
+            }
+          }
+        } catch(e){ /* ignore */ }
+      });
+    }
 
-    /* Drop card */
-    cards.addEventListener("dragover",e=>{ e.preventDefault(); cards.classList.add("drag-over"); });
-    cards.addEventListener("dragleave",()=> cards.classList.remove("drag-over"));
-    cards.addEventListener("drop",e=>{
-      cards.classList.remove("drag-over");
-      const data=JSON.parse(e.dataTransfer.getData("text/plain")||"{}");
-      if(data.type==="card"){
-        links = links.filter(l=>l.id!==data.id);
-        links.push({...data.payload,category:cat.id});
-        save(); render();
-      }
-    });
-
-    /* Cards */
+    /* render cards */
     links.forEach(l=>{
-      if(l.category!==cat.id) return;
+      if(l.category !== cat.id) return;
       if(q && !l.title.toLowerCase().includes(q)) return;
 
-      const cd=document.createElement("div");
-      cd.className="card";
-      cd.draggable=true;
-      cd.innerHTML=`<div class="card-title">${l.title}</div><div class="card-url">${l.url}</div>`;
-      cd.addEventListener("click",()=>window.open(l.url,"_blank"));
-      cd.addEventListener("dragstart",e=>{
-        cd.classList.add("dragging");
-        e.dataTransfer.setData("text/plain",JSON.stringify({type:"card",id:l.id,payload:l}));
-      });
-      cd.addEventListener("dragend",()=> cd.classList.remove("dragging"));
-      cards.appendChild(cd);
+      const card = document.createElement("div");
+      card.className = "card";
+      card.dataset.linkId = l.id;
+      card.innerHTML = `<div class="card-title">${l.title}</div><div class="card-url">${l.url}</div>`;
+
+      /* click open link (always allowed) */
+      card.addEventListener("click", ()=> window.open(l.url, "_blank"));
+
+      /* drag start & end only for admin */
+      if(admin){
+        card.draggable = true;
+        card.addEventListener("dragstart", ev=>{
+          card.classList.add("dragging");
+          ev.dataTransfer.setData("text/plain", JSON.stringify({type:"card", id: l.id, payload: l}));
+          ev.dataTransfer.effectAllowed = "move";
+        });
+        card.addEventListener("dragend", ()=> card.classList.remove("dragging"));
+      } else {
+        card.draggable = false;
+      }
+
+      cards.appendChild(card);
     });
 
-    /* Add-card → show only if category has links */
-    const hasLinks = links.some(l=>l.category===cat.id);
+    /* add-card shown ONLY when category has links AND admin can add? 
+       Requirement: show add-card only if links exist; and even if admin or public,
+       clicking add must be via admin. We'll show + when links exist; open modal only if admin. */
+    const hasLinks = links.some(x=>x.category === cat.id);
     if(hasLinks){
-      const add=document.createElement("div");
-      add.className="card add-card";
-      add.textContent="+";
-      add.onclick=()=>openAddLink(cat.id);
-      cards.appendChild(add);
+      const addCard = document.createElement("div");
+      addCard.className = "card add-card";
+      addCard.textContent = "+";
+      addCard.addEventListener("click", ()=>{
+        if(!isAdmin()){
+          alert("Add link is for admin only. Please login as admin.");
+          return;
+        }
+        openAddLink(cat.id);
+      });
+      cards.appendChild(addCard);
+    }
+
+    /* If admin, allow dragging category (for reorder) */
+    if(admin){
+      row.draggable = true;
+      row.addEventListener("dragstart", e=>{
+        e.dataTransfer.setData("text/plain", JSON.stringify({type:"cat", id: cat.id}));
+        row.style.opacity = "0.5";
+      });
+      row.addEventListener("dragend", ()=> row.style.opacity = "1");
+      row.addEventListener("dragover", e=>{ e.preventDefault(); row.classList.add("drag-over"); });
+      row.addEventListener("dragleave", ()=> row.classList.remove("drag-over"));
+      row.addEventListener("drop", e=>{
+        row.classList.remove("drag-over");
+        try{
+          const data = JSON.parse(e.dataTransfer.getData("text/plain") || "{}");
+          if(data.type === "cat" && data.id !== cat.id){
+            const fromIndex = categories.findIndex(c=>c.id === data.id);
+            const toIndex = categories.findIndex(c=>c.id === cat.id);
+            const [moved] = categories.splice(fromIndex,1);
+            categories.splice(toIndex,0,moved);
+            saveAll(); render();
+          }
+        }catch(ex){}
+      });
+    } else {
+      row.draggable = false;
     }
 
     row.appendChild(cards);
     main.appendChild(row);
   });
+
+  /* If not admin, show hint */
+  if(!isAdmin()){
+    const info = document.createElement("div");
+    info.className = "muted";
+    info.style.marginTop = "18px";
+    info.textContent = "You are in public (read-only) view. Click 'Admin Login' to manage links (admin only).";
+    main.appendChild(info);
+  } else {
+    const info = document.createElement("div");
+    info.className = "muted";
+    info.style.marginTop = "18px";
+    info.textContent = "Admin active. Auto-lock will occur after 5 minutes of inactivity.";
+    main.appendChild(info);
+  }
 }
 
-/* Modal helpers */
-const overlay=document.getElementById("modalBackdrop");
-const modal=document.getElementById("modalContent");
-const openModal=html=>{modal.innerHTML=html;overlay.style.display="flex";};
-const closeModal=()=>{overlay.style.display="none";modal.innerHTML="";};
-overlay.onclick=e=>{if(e.target===overlay) closeModal()};
+/* ========== MODALS & CRUD ========== */
+const overlay = document.getElementById("modalBackdrop");
+const modal = document.getElementById("modalContent");
+function openModal(html){ modal.innerHTML = html; overlay.style.display = "flex"; }
+function closeModal(){ overlay.style.display = "none"; modal.innerHTML = ""; }
+overlay.onclick = (e)=> { if(e.target === overlay) closeModal(); };
 
 /* Add Category */
-btnAddCategory.onclick=()=>{
-  openModal(`
-    <h3>Add Category</h3>
+document.getElementById("btnAddCategory").onclick = ()=>{
+  if(!isAdmin()){ alert("Admin only"); return; }
+  openModal(`<h3>Add Category</h3>
     <input id="catName" placeholder="Category name" />
-    <div class="row"><button class="btn-primary" id="saveCat">Save</button></div>
-  `);
-  saveCat.onclick=()=>{
-    const name=catName.value.trim();
+    <div class="row"><button class="btn-primary" id="saveCat">Save</button></div>`);
+  document.getElementById("saveCat").onclick = ()=>{
+    const name = document.getElementById("catName").value.trim();
     if(!name) return alert("Enter name");
-    categories.push({id:uid(),name});
-    save(); closeModal(); render();
+    categories.push({id: uid(), name});
+    saveAll(); closeModal(); render();
   };
 };
 
 /* Add Link */
 function openAddLink(catId){
-  const opts=categories.map(c=>`<option value="${c.id}" ${c.id===catId?"selected":""}>${c.name}</option>`).join("");
-  openModal(`
-    <h3>Add Link</h3>
+  if(!isAdmin()){ alert("Admin only"); return; }
+  const opts = categories.map(c=>`<option value="${c.id}" ${c.id===catId?"selected":""}>${c.name}</option>`).join("");
+  openModal(`<h3>Add Link</h3>
     <input id="lTitle" placeholder="Title" />
     <input id="lUrl" placeholder="https://example.com" />
     <select id="lCat">${opts}</select>
-    <div class="row"><button class="btn-primary" id="saveLink">Save</button></div>
-  `);
-  saveLink.onclick=()=>{
-    const t=lTitle.value.trim();
-    const u=lUrl.value.trim();
-    if(!t||!u) return alert("Missing fields");
-    links.push({id:uid(),title:t,url:u,category:lCat.value});
-    save(); closeModal(); render();
+    <div class="row"><button class="btn-primary" id="saveLink">Save</button></div>`);
+  document.getElementById("saveLink").onclick = ()=>{
+    const t = document.getElementById("lTitle").value.trim();
+    const u = document.getElementById("lUrl").value.trim();
+    const c = document.getElementById("lCat").value;
+    if(!t||!u) return alert("All fields required");
+    links.push({id: uid(), title: t, url: u, category: c});
+    saveAll(); closeModal(); render();
   };
 }
-btnAddLink.onclick=()=>openAddLink(categories[0].id);
+document.getElementById("btnAddLink").onclick = ()=> {
+  if(!isAdmin()){ alert("Admin only"); return; }
+  openAddLink(categories[0]?.id || null);
+};
 
-/* Delete */
-btnDelete.onclick=()=>{
-  const cOps=categories.map(c=>`<option value="${c.id}">${c.name}</option>`).join("");
-  const lOps=links.map(l=>`<option value="${l.id}">${l.title}</option>`).join("");
-  openModal(`
-    <h3>Delete</h3>
-    <label><input type="radio" name="typ" value="cat" checked> Category</label><br>
-    <label><input type="radio" name="typ" value="link"> Link</label>
-    <div id="delWrap" style="margin-top:10px"><select id="delVal">${cOps}</select></div>
-    <div class="row"><button class="btn-danger" id="doDelete">Delete</button></div>
-  `);
-  document.querySelectorAll("input[name=typ]").forEach(r=>r.onchange=()=>{
-    delWrap.innerHTML = r.value==="cat"
-      ? `<select id="delVal">${cOps}</select>`
-      : `<select id="delVal">${lOps}</select>`;
+/* Delete (top) */
+document.getElementById("btnDelete").onclick = ()=>{
+  if(!isAdmin()){ alert("Admin only"); return; }
+  const cOpts = categories.map(c=>`<option value="${c.id}">${c.name}</option>`).join("");
+  const lOpts = links.map(l=>`<option value="${l.id}">${l.title}</option>`).join("");
+  openModal(`<h3>Delete</h3>
+    <label><input type="radio" name="dType" value="cat" checked> Delete Category</label><br>
+    <label><input type="radio" name="dType" value="link"> Delete Link</label>
+    <div id="delWrap" style="margin-top:10px"><select id="delSelect">${cOpts}</select></div>
+    <div class="row"><button class="btn-danger" id="doDelete">Delete</button></div>`);
+  document.querySelectorAll("input[name='dType']").forEach(r=> r.onchange = ()=>{
+    document.getElementById("delWrap").innerHTML = (r.value==="cat") ? `<select id="delSelect">${cOpts}</select>` : `<select id="delSelect">${lOpts}</select>`;
   });
-  doDelete.onclick=()=>{
-    const t=document.querySelector("input[name=typ]:checked").value;
-    const id=delVal.value;
+  document.getElementById("doDelete").onclick = ()=>{
+    const t = document.querySelector("input[name='dType']:checked").value;
+    const id = document.getElementById("delSelect").value;
     if(t==="cat"){
       if(links.some(l=>l.category==id)) return alert("Category not empty");
-      categories=categories.filter(c=>c.id!==id);
+      categories = categories.filter(c=>c.id!==id);
     } else {
-      links=links.filter(l=>l.id!==id);
+      links = links.filter(l=>l.id!==id);
     }
-    save(); closeModal(); render();
-  }
+    saveAll(); closeModal(); render();
+  };
 };
 
 /* Export */
-btnExport.onclick=()=>{
-  const data=links.map(l=>({
-    Category:categories.find(c=>c.id===l.category)?.name,
-    Title:l.title,
-    URL:l.url
+document.getElementById("btnExport").onclick = ()=>{
+  if(!isAdmin()){ alert("Admin only"); return; }
+  const data = links.map(l => ({
+    Category: categories.find(c=>c.id===l.category)?.name || "",
+    Title: l.title,
+    URL: l.url
   }));
   const ws = XLSX.utils.json_to_sheet(data);
   const wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb,ws,"Links");
-  XLSX.writeFile(wb,"DashboardLinks.xlsx");
+  XLSX.utils.book_append_sheet(wb, ws, "Links");
+  XLSX.writeFile(wb, "DashboardLinks.xlsx");
 };
 
 /* Import */
-btnImport.onclick=()=>{
-  openModal(`
-    <h3>Import Excel/CSV</h3>
-    <input id="imp" type="file" accept=".csv,.xlsx" />
-    <div class="row"><button class="btn-primary" id="doImp">Import</button></div>
-  `);
-  doImp.onclick=()=>{
-    const f=imp.files[0];
+document.getElementById("btnImport").onclick = ()=>{
+  if(!isAdmin()){ alert("Admin only"); return; }
+  openModal(`<h3>Import Excel/CSV</h3>
+    <input id="impFile" type="file" accept=".csv,.xlsx" />
+    <div class="row"><button class="btn-primary" id="doImport">Import</button></div>`);
+  document.getElementById("doImport").onclick = ()=>{
+    const f = document.getElementById("impFile").files[0];
     if(!f) return alert("Select file");
-    const rd=new FileReader();
-    rd.onload=e=>{
-      const wb=XLSX.read(e.target.result,{type:"binary"});
-      const ws=wb.Sheets[wb.SheetNames[0]];
-      const rows=XLSX.utils.sheet_to_json(ws);
-
-      links=[];
+    const reader = new FileReader();
+    reader.onload = e=>{
+      const wb = XLSX.read(e.target.result, {type:"binary"});
+      const ws = wb.Sheets[wb.SheetNames[0]];
+      const rows = XLSX.utils.sheet_to_json(ws);
+      links = [];
       rows.forEach(r=>{
-        const cname=(r.Category||"").trim();
+        const cname = (r.Category || "").toString().trim();
         if(!cname) return;
-        let cat=categories.find(c=>c.name.toLowerCase()===cname.toLowerCase());
-        if(!cat){
-          cat={id:uid(),name:cname}; categories.push(cat);
-        }
-        links.push({
-          id:uid(), title:r.Title||"", url:r.URL||"", category:cat.id
-        });
+        let cat = categories.find(c=>c.name.toLowerCase() === cname.toLowerCase());
+        if(!cat){ cat = {id: uid(), name: cname}; categories.push(cat); }
+        links.push({id: uid(), title: (r.Title||"").toString(), url: (r.URL||"").toString(), category: cat.id});
       });
-
-      save(); closeModal(); render();
+      saveAll(); closeModal(); render(); alert("Import successful");
     };
-    rd.readAsBinaryString(f);
+    reader.readAsBinaryString(f);
   };
 };
 
-/* Events */
-search.oninput=render;
-sort.onchange=render;
+/* Search & Sort */
+searchBox.addEventListener("input", ()=> render());
+catSort.addEventListener("change", ()=> render());
 
-/* Start */
+/* ========== ADMIN LOGIN FLOW (PIN) ========== */
+btnAdminToggle.onclick = ()=>{
+  if(isAdmin()){
+    // logout
+    if(confirm("Logout admin?")){
+      endAdminSession();
+      render();
+    }
+    return;
+  }
+  // open PIN modal
+  openModal(`
+    <h3>Admin Login (6-digit PIN)</h3>
+    <input id="pinInput" class="pin-input" type="password" maxlength="6" placeholder="●●●●●●" />
+    <div class="row"><button class="btn-primary" id="doPinLogin">Login</button></div>
+  `);
+  document.getElementById("doPinLogin").onclick = ()=>{
+    const pin = (document.getElementById("pinInput").value || "").trim();
+    if(pin.length !== 6) return alert("Enter 6-digit PIN");
+    if(pin === ADMIN_PIN){
+      startAdminSession();
+      closeModal();
+      render();
+      alert("Admin login successful");
+    } else {
+      alert("Incorrect PIN");
+    }
+  };
+};
+
+/* Auto-lock & session helpers (implemented above): setupActivityWatcher called on startAdminSession */
+
+/* Initialize admin UI state on load */
+updateAdminUI();
+if(isAdmin()) setupActivityWatcher();
+
+/* initial render */
 render();
-</script>
 
+</script>
 </body>
 </html>
