@@ -3,9 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Pro Dashboard Links</title>
+<title>Dashboard Links - Pro v4</title>
 
-<!-- Professional Blue / Glass Theme -->
 <style>
   :root{
     --bg:#eef6fb;
@@ -22,8 +21,6 @@
     font-family: Inter, "Segoe UI", Roboto, Arial;
     background: linear-gradient(180deg,var(--bg),#eef3f8);
     color:#172033;
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
     padding:28px;
   }
 
@@ -31,10 +28,10 @@
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap:16px;
     max-width:1100px;
     margin:0 auto 22px;
   }
+
   .brand{
     display:flex;align-items:center;gap:14px;
   }
@@ -42,42 +39,40 @@
     width:52px;height:52px;border-radius:12px;
     background:linear-gradient(135deg,var(--accent),var(--accent-2));
     color:white;display:flex;align-items:center;justify-content:center;
-    font-weight:700;font-size:22px;box-shadow:0 6px 18px rgba(27,117,187,0.22);
+    font-weight:700;font-size:22px;
   }
-  h1{margin:0;font-size:20px;letter-spacing:0.2px}
+
   .controls{display:flex;gap:10px;align-items:center}
 
   button.btn{
     padding:10px 14px;border-radius:10px;border:0;cursor:pointer;font-weight:600;
     background:linear-gradient(90deg,var(--accent-2),var(--accent));color:white;
-    box-shadow:0 8px 18px rgba(27,117,187,0.15);
   }
   button.ghost{
-    background:transparent;border:1px solid rgba(23,32,51,0.06);color:var(--accent-2);
+    background:transparent;border:1px solid rgba(23,32,51,0.06);
     padding:8px 12px;border-radius:10px;font-weight:600;cursor:pointer;
+    color:var(--accent-2);
   }
 
   main{max-width:1100px;margin:0 auto}
 
-  /* Categories list */
+  /* category */
   .category-row{
     margin-top:22px;
   }
-
   .category-header{
-    display:flex;align-items:center;justify-content:space-between;
-    gap:10px;padding:6px 10px;border-radius:12px;
+    display:flex;align-items:center;gap:12px;
   }
-  .cat-left{display:flex;align-items:center;gap:12px}
+
   .cat-bubble{
     width:44px;height:44px;border-radius:10px;background:var(--glass);
     display:flex;align-items:center;justify-content:center;font-size:20px;
-    box-shadow:0 6px 18px rgba(8,20,40,0.04);
   }
-  .cat-title{font-size:18px;font-weight:700}
-  .cat-actions{display:flex;gap:8px;align-items:center}
 
-  /* Cards grid */
+  .cat-title{font-size:20px;font-weight:700;margin-bottom:4px}
+  .muted{font-size:13px;color:var(--muted)}
+
+  /* cards */
   .cards{
     display:grid;
     grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
@@ -88,56 +83,51 @@
   .card{
     background: linear-gradient(180deg, rgba(255,255,255,0.9), var(--card));
     border-radius:12px;padding:14px;cursor:pointer;position:relative;
+    min-height:86px;
     box-shadow: 0 6px 18px rgba(25,45,70,0.06);
-    transition:transform .15s ease, box-shadow .15s ease;
-    display:flex;flex-direction:column;gap:8px;min-height:86px;
+    transition:transform .15s ease;
   }
-  .card:hover{transform:translateY(-6px);box-shadow:0 14px 30px rgba(25,45,70,0.08);}
+  .card:hover{transform:translateY(-6px);}
 
-  .card-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
   .card-icon{
     width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));
     color:white;display:flex;align-items:center;justify-content:center;font-size:20px;
+    margin-bottom:10px;
   }
-  .card-title{font-weight:700;font-size:15px;color:#0f2536}
-  .card-url{font-size:12px;color:var(--muted);overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
-  .card-actions{display:flex;gap:6px;align-items:center}
 
-  .small-btn{
-    border:0;padding:6px 8px;border-radius:8px;cursor:pointer;font-weight:700;
-    background:rgba(255,255,255,0.85);box-shadow:0 3px 8px rgba(10,20,30,0.04);
-  }
-  .edit-btn{color:#0f6fb0}
-  .del-btn{color:#c0392b}
+  .card-title{font-weight:700;font-size:15px}
+  .card-url{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
-  /* Add card style */
+  /* add card */
   .add-card{
-    display:flex;align-items:center;justify-content:center;font-size:34px;
-    background:linear-gradient(135deg,#e8f6ff,#ffffff);color:var(--accent-2);
-    border:2px dashed rgba(27,117,187,0.12);min-height:86px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:34px;
+    background:linear-gradient(135deg,#e8f6ff,#ffffff);
+    color:var(--accent-2);
+    border:2px dashed rgba(27,117,187,0.12);
   }
 
-  /* MODAL */
-  .modal-backdrop{position:fixed;inset:0;background:rgba(8,20,40,0.45);display:none;align-items:center;justify-content:center;padding:20px;z-index:1200}
+  /* modal */
+  .modal-backdrop{
+    position:fixed;inset:0;background:rgba(0,0,0,0.4);
+    display:none;align-items:center;justify-content:center;padding:20px;
+  }
   .modal{
-    width:440px;max-width:100%;background:white;border-radius:12px;padding:18px;box-shadow:0 20px 60px rgba(6,20,40,0.35);
+    width:400px;max-width:100%;background:white;border-radius:12px;padding:18px;
   }
-  .modal h3{margin:0 0 8px 0}
-  .form-row{display:flex;flex-direction:column;gap:8px;margin-top:8px}
-  input[type="text"], input[type="url"], select{
-    padding:10px;border-radius:8px;border:1px solid #e6eef6;font-size:14px;
-  }
-  .modal .row{display:flex;gap:10px}
-  .muted{font-size:13px;color:var(--muted)}
-  .small{font-size:13px;padding:8px 10px;border-radius:8px;border:0;cursor:pointer}
+  .modal h3{margin:0 0 10px}
 
-  /* Responsive */
-  @media (max-width:640px){
-    header{padding:0 6px}
+  input, select{
+    width:100%;padding:10px;margin-top:6px;border-radius:8px;
+    border:1px solid #ccd6e3;font-size:14px;
+  }
+
+  .row{display:flex;gap:10px;margin-top:14px;justify-content:flex-end}
+
+  /* responsive */
+  @media(max-width:640px){
     .cards{grid-template-columns: repeat(auto-fill,minmax(160px,1fr))}
-    .cat-bubble{width:40px;height:40px}
   }
-
 </style>
 </head>
 <body>
@@ -146,7 +136,7 @@
   <div class="brand">
     <div class="logo">DL</div>
     <div>
-      <h1>Dashboard Links - Pro</h1>
+      <div class="cat-title" style="font-size:20px;">Dashboard Links - Pro</div>
       <div class="muted">Fast access to your teams & tools</div>
     </div>
   </div>
@@ -154,383 +144,184 @@
   <div class="controls">
     <button class="ghost" id="btnAddCategory">+ Add Category</button>
     <button class="btn" id="btnAddGlobalLink">+ Add Link</button>
+    <button class="ghost" id="btnDeleteItem">🗑 Delete</button>
   </div>
 </header>
 
-<main id="mainArea">
-  <!-- categories render here -->
-</main>
+<main id="mainArea"></main>
 
-<!-- MODALS -->
+<!-- MODAL -->
 <div class="modal-backdrop" id="modalBackdrop">
-  <div class="modal" id="modalContent">
-    <!-- dynamic content -->
-  </div>
+  <div class="modal" id="modalContent"></div>
 </div>
 
-<!-- TEMPLATE FOR EMPTY -->
-<template id="emptyTpl">
-  <div class="category-header">
-    <div class="cat-left">
-      <div class="cat-bubble">✨</div>
-      <div>
-        <div class="cat-title">No Categories</div>
-        <div class="muted">Create your first category to add links</div>
-      </div>
-    </div>
-    <div class="cat-actions">
-      <button class="ghost" id="createFirst">Create</button>
-    </div>
-  </div>
-</template>
-
 <script>
-/* ---------------------------
-  Data model:
-  localStorage keys:
-   - dashboard_categories : array of {id,name}
-   - dashboard_links : array of {id,title,url,categoryId}
-----------------------------*/
+/* STORAGE */
+const STORAGE_CATS = "cats_v4";
+const STORAGE_LINKS = "links_v4";
 
-const STORAGE_CATS = "dashboard_categories_v3";
-const STORAGE_LINKS = "dashboard_links_v3";
-
-/* Default categories (only inserted if none exist) */
-const DEFAULT_CATEGORIES = [
-  { id: "c_hr", name: "HR" },
-  { id: "c_production", name: "Production" },
-  { id: "c_finance", name: "Finance" },
-  { id: "c_it", name: "IT" },
-  { id: "c_admin", name: "Admin" }
+let categories = JSON.parse(localStorage.getItem(STORAGE_CATS)) || [
+  {id:"c1",name:"HR"},
+  {id:"c2",name:"Production"},
+  {id:"c3",name:"Finance"},
+  {id:"c4",name:"IT"},
+  {id:"c5",name:"Admin"}
 ];
+let links = JSON.parse(localStorage.getItem(STORAGE_LINKS)) || [];
 
-let categories = loadJSON(STORAGE_CATS) || null;
-let links = loadJSON(STORAGE_LINKS) || [];
+function save(){ localStorage.setItem(STORAGE_CATS,JSON.stringify(categories)); localStorage.setItem(STORAGE_LINKS,JSON.stringify(links)); }
 
-/* initialize categories if empty */
-if (!categories || categories.length === 0) {
-  categories = DEFAULT_CATEGORIES.slice();
-  saveJSON(STORAGE_CATS, categories);
+function iconFor(cat){
+  const map={HR:"👨‍💼",Production:"🏭",Finance:"💰",IT:"💻",Admin:"🏢"};
+  return map[cat] || "🔗";
 }
 
-/* ----------------- helpers ----------------- */
-function uid(prefix="id"){
-  return prefix + "_" + Date.now().toString(36) + Math.random().toString(36).slice(2,7);
-}
-function saveJSON(key, obj){ localStorage.setItem(key, JSON.stringify(obj)); }
-function loadJSON(key){ try{ const t = localStorage.getItem(key); return t? JSON.parse(t): null } catch(e){ return null } }
+function uid(){return "id"+Math.random().toString(36).slice(2);}
 
-/* map categoryId -> emoji/icon */
-function getIconFor(name){
-  const map = {
-    "HR":"👨‍💼",
-    "Production":"🏭",
-    "Finance":"💰",
-    "IT":"💻",
-    "Admin":"🏢",
-    "Purchase":"🛒",
-    "Store":"📦",
-    "Maintenance":"🛠"
-  };
-  return map[name] || "🔗";
-}
+/* RENDER */
+function render(){
+  const main=document.getElementById("mainArea");
+  main.innerHTML="";
 
-/* ----------------- render ----------------- */
-const mainArea = document.getElementById("mainArea");
-function renderAll(){
-  mainArea.innerHTML = "";
-  if (!categories || categories.length === 0){
-    const tpl = document.getElementById("emptyTpl").content.cloneNode(true);
-    mainArea.appendChild(tpl);
-    document.getElementById("createFirst").addEventListener("click", ()=> openCategoryModal());
-    return;
-  }
+  categories.forEach(cat=>{
+    const row=document.createElement("div");
+    row.className="category-row";
 
-  categories.forEach(cat => {
-    const catWrap = document.createElement("div");
-    catWrap.className = "category-row";
+    const head=document.createElement("div");
+    head.className="category-header";
+    head.innerHTML=`
+      <div class="cat-bubble">${iconFor(cat.name)}</div>
+      <div>
+        <div class="cat-title">${cat.name}</div>
+        <div class="muted">${links.filter(l=>l.category==cat.id).length} links</div>
+      </div>`;
+    row.appendChild(head);
 
-    // header
-    const header = document.createElement("div");
-    header.className = "category-header";
+    const cards=document.createElement("div");
+    cards.className="cards";
 
-    const left = document.createElement("div");
-    left.className = "cat-left";
-
-    const bubble = document.createElement("div");
-    bubble.className = "cat-bubble";
-    bubble.textContent = getIconFor(cat.name);
-
-    const titleBlock = document.createElement("div");
-    titleBlock.innerHTML = `<div class="cat-title">${cat.name}</div><div class="muted">${(links.filter(l=>l.categoryId===cat.id).length)} links</div>`;
-
-    left.appendChild(bubble);
-    left.appendChild(titleBlock);
-
-    const right = document.createElement("div");
-    right.className = "cat-actions";
-
-    const addBtn = document.createElement("button");
-    addBtn.className = "ghost small";
-    addBtn.textContent = "+ Add";
-    addBtn.addEventListener("click", (e)=> { e.stopPropagation(); openLinkModal(cat.id); });
-
-    const delCat = document.createElement("button");
-    delCat.className = "small";
-    delCat.textContent = "Delete";
-    delCat.style.background = "linear-gradient(90deg,#fff,#ffecec)";
-    delCat.style.border = "1px solid rgba(200,70,70,0.08)";
-    delCat.addEventListener("click", (e)=> { e.stopPropagation(); tryDeleteCategory(cat.id); });
-
-    right.appendChild(addBtn);
-    right.appendChild(delCat);
-
-    header.appendChild(left);
-    header.appendChild(right);
-
-    // cards container
-    const cards = document.createElement("div");
-    cards.className = "cards";
-
-    const catLinks = links.filter(l=>l.categoryId === cat.id);
-    catLinks.forEach(link => {
-      const c = document.createElement("div");
-      c.className = "card";
-
-      // clicking card opens link
-      c.addEventListener("click", ()=> { window.open(link.url, "_blank"); });
-
-      const top = document.createElement("div");
-      top.className = "card-top";
-
-      const icon = document.createElement("div");
-      icon.className = "card-icon";
-      icon.textContent = getIconFor(cat.name);
-
-      const actions = document.createElement("div");
-      actions.className = "card-actions";
-
-      const edit = document.createElement("button");
-      edit.className = "small-btn edit-btn";
-      edit.textContent = "🖊";
-      edit.title = "Edit";
-      edit.addEventListener("click", (ev)=> { ev.stopPropagation(); openLinkModal(cat.id, link.id); });
-
-      const del = document.createElement("button");
-      del.className = "small-btn del-btn";
-      del.textContent = "❌";
-      del.title = "Delete";
-      del.addEventListener("click", (ev)=> { ev.stopPropagation(); deleteLink(link.id); });
-
-      actions.appendChild(edit);
-      actions.appendChild(del);
-
-      top.appendChild(icon);
-      top.appendChild(actions);
-
-      const titleEl = document.createElement("div");
-      titleEl.className = "card-title";
-      titleEl.textContent = link.title;
-
-      const urlEl = document.createElement("div");
-      urlEl.className = "card-url";
-      urlEl.textContent = link.url;
-
-      c.appendChild(top);
-      c.appendChild(titleEl);
-      c.appendChild(urlEl);
+    links.filter(l=>l.category==cat.id).forEach(l=>{
+      const c=document.createElement("div");
+      c.className="card";
+      c.addEventListener("click",()=>window.open(l.url,"_blank"));
+      c.innerHTML=`
+        <div class="card-icon">${iconFor(cat.name)}</div>
+        <div class="card-title">${l.title}</div>
+        <div class="card-url">${l.url}</div>`;
       cards.appendChild(c);
     });
 
-    // add-card at end of category
-    const addCard = document.createElement("div");
-    addCard.className = "card add-card";
-    addCard.innerHTML = "+";
-    addCard.addEventListener("click", ()=> openLinkModal(cat.id));
-    cards.appendChild(addCard);
+    const add=document.createElement("div");
+    add.className="card add-card";
+    add.textContent="+";
+    add.onclick=()=>openLinkModal(cat.id);
+    cards.appendChild(add);
 
-    catWrap.appendChild(header);
-    catWrap.appendChild(cards);
-    mainArea.appendChild(catWrap);
+    row.appendChild(cards);
+    main.appendChild(row);
   });
-
-  // small footer spacing
-  const spacer = document.createElement("div");
-  spacer.style.height = "36px";
-  mainArea.appendChild(spacer);
 }
 
-/* ----------------- CRUD actions ----------------- */
-
-function tryDeleteCategory(catId){
-  const used = links.some(l=>l.categoryId===catId);
-  const cat = categories.find(c=>c.id===catId);
-  if (used){
-    alert("Category '" + cat.name + "' cannot be deleted because it contains links. Remove links first.");
-    return;
-  }
-  if (confirm("Delete category '" + cat.name + "'?")){
-    categories = categories.filter(c=>c.id!==catId);
-    saveJSON(STORAGE_CATS, categories);
-    renderAll();
-  }
-}
-
-function deleteLink(linkId){
-  const link = links.find(l=>l.id===linkId);
-  if (!link) return;
-  if (!confirm("Delete link '" + link.title + "'?")) return;
-  links = links.filter(l=>l.id!==linkId);
-  saveJSON(STORAGE_LINKS, links);
-  renderAll();
-}
-
-/* ----------------- MODALS (create/edit link & category) ----------------- */
-
-const backdrop = document.getElementById("modalBackdrop");
-const modalContent = document.getElementById("modalContent");
-
+/* MODAL */
+const modalB=document.getElementById("modalBackdrop");
+const modalC=document.getElementById("modalContent");
 function openModal(html){
-  modalContent.innerHTML = html;
-  backdrop.style.display = "flex";
-  // attach close button
-  const closeBtn = modalContent.querySelector("[data-close]");
-  if (closeBtn) closeBtn.addEventListener("click", closeModal);
+  modalC.innerHTML=html;
+  modalB.style.display="flex";
+}
+modalB.onclick=e=>{ if(e.target===modalB) closeModal(); }
+function closeModal(){ modalB.style.display="none"; }
+
+/* ADD CATEGORY */
+function openCatModal(){
+  openModal(`
+    <h3>Add Category</h3>
+    <input id="catName" placeholder="Category name" />
+    <div class="row"><button class="btn" id="saveCat">Save</button></div>
+  `);
+  document.getElementById("saveCat").onclick=()=>{
+    const name=document.getElementById("catName").value.trim();
+    if(!name) return alert("Enter name");
+    categories.push({id:uid(),name});
+    save(); closeModal(); render();
+  };
 }
 
-function closeModal(){
-  backdrop.style.display = "none";
-  modalContent.innerHTML = "";
+/* ADD LINK */
+function openLinkModal(catId){
+  const opts=categories.map(c=>`<option value="${c.id}" ${c.id==catId?"selected":""}>${c.name}</option>`).join("");
+  openModal(`
+    <h3>Add Link</h3>
+    <input id="lTitle" placeholder="Title" />
+    <input id="lUrl" placeholder="https://..." />
+    <select id="lCat">${opts}</select>
+    <div class="row"><button class="btn" id="saveLink">Save</button></div>
+  `);
+  document.getElementById("saveLink").onclick=()=>{
+    const t=document.getElementById("lTitle").value.trim();
+    const u=document.getElementById("lUrl").value.trim();
+    const c=document.getElementById("lCat").value;
+    if(!t||!u) return alert("All fields required");
+    links.push({id:uid(),title:t,url:u,category:c});
+    save(); closeModal(); render();
+  };
 }
 
-/* Link modal: if linkId provided => edit, else create */
-function openLinkModal(categoryId=null, linkId=null){
-  const isEdit = !!linkId;
-  const link = isEdit ? links.find(l=>l.id===linkId) : null;
+/* DELETE MENU */
+function openDeleteModal(){
+  const catOpts=categories.map(c=>`<option value="${c.id}">${c.name}</option>`).join("");
+  const linkOpts=links.map(l=>`<option value="${l.id}">${l.title}</option>`).join("");
 
-  // build category options
-  const catOptions = categories.map(c=> `<option value="${c.id}" ${categoryId===c.id || (link && link.categoryId===c.id) ? "selected" : ""}>${c.name}</option>`).join("");
+  openModal(`
+    <h3>Delete</h3>
 
-  const html = `
-    <div style="display:flex;justify-content:space-between;align-items:center">
-      <h3>${isEdit ? "Edit Link" : "Add Link"}</h3>
-      <button data-close class="ghost small">Close</button>
+    <label><input type="radio" name="dtype" value="cat" checked /> Delete Category</label><br>
+    <label><input type="radio" name="dtype" value="link" /> Delete Link</label>
+
+    <div id="delSelectWrap" style="margin-top:12px;">
+      <select id="delSelect">${catOpts}</select>
     </div>
 
-    <div class="form-row">
-      <label class="muted">Title</label>
-      <input type="text" id="modal_title" value="${link? escapeHtml(link.title) : ""}" placeholder="Eg. HR Portal">
-      <label class="muted">URL</label>
-      <input type="url" id="modal_url" value="${link? escapeHtml(link.url) : ""}" placeholder="https://...">
-      <label class="muted">Category</label>
-      <select id="modal_cat">${catOptions}</select>
+    <div class="row">
+      <button class="btn" style="background:#c0392b" id="doDelete">Delete</button>
     </div>
+  `);
 
-    <div style="display:flex;gap:10px;margin-top:14px;justify-content:flex-end">
-      ${isEdit ? '<button id="btnDeleteLink" class="small" style="background:#ffecec;color:#a33">Delete</button>' : ''}
-      <button id="btnSaveLink" class="btn">${isEdit ? "Save Changes" : "Add Link"}</button>
-    </div>
-  `;
-  openModal(html);
+  const radios=document.querySelectorAll("input[name='dtype']");
+  const wrap=document.getElementById("delSelectWrap");
 
-  document.getElementById("btnSaveLink").addEventListener("click", ()=>{
-    const title = document.getElementById("modal_title").value.trim();
-    const url = document.getElementById("modal_url").value.trim();
-    const catId = document.getElementById("modal_cat").value;
-
-    if (!title || !url){
-      alert("Title and URL are required");
-      return;
-    }
-    if (!isValidURL(url)){
-      alert("Please enter a valid URL (start with http:// or https://)");
-      return;
-    }
-
-    if (isEdit){
-      // update
-      links = links.map(l=>{
-        if (l.id === linkId) return {...l, title, url, categoryId:catId};
-        return l;
-      });
-    } else {
-      const newLink = { id: uid("lnk"), title, url, categoryId: catId };
-      links.push(newLink);
-    }
-    saveJSON(STORAGE_LINKS, links);
-    closeModal();
-    renderAll();
+  radios.forEach(r=>{
+    r.onchange=()=>{
+      const type=document.querySelector("input[name='dtype']:checked").value;
+      wrap.innerHTML= type==="cat"
+        ? `<select id="delSelect">${catOpts}</select>`
+        : `<select id="delSelect">${linkOpts}</select>`;
+    };
   });
 
-  if (isEdit){
-    document.getElementById("btnDeleteLink").addEventListener("click", ()=>{
-      if (confirm("Delete this link?")){
-        links = links.filter(l=>l.id !== linkId);
-        saveJSON(STORAGE_LINKS, links);
-        closeModal();
-        renderAll();
+  document.getElementById("doDelete").onclick=()=>{
+    const type=document.querySelector("input[name='dtype']:checked").value;
+    const id=document.getElementById("delSelect").value;
+
+    if(type==="cat"){
+      if(links.some(l=>l.category==id)){
+        return alert("Category not empty");
       }
-    });
-  }
-}
-
-/* Category modal */
-function openCategoryModal(){
-  const html = `
-    <div style="display:flex;justify-content:space-between;align-items:center">
-      <h3>Create Category</h3>
-      <button data-close class="ghost small">Close</button>
-    </div>
-
-    <div class="form-row">
-      <label class="muted">Category Name</label>
-      <input type="text" id="modal_catname" placeholder="Eg. Marketing">
-    </div>
-
-    <div style="display:flex;gap:10px;margin-top:14px;justify-content:flex-end">
-      <button id="btnCreateCat" class="btn">Create</button>
-    </div>
-  `;
-  openModal(html);
-  document.getElementById("btnCreateCat").addEventListener("click", ()=>{
-    const name = document.getElementById("modal_catname").value.trim();
-    if (!name) { alert("Category name required"); return; }
-    // avoid duplicates (case-insensitive)
-    if (categories.some(c=> c.name.toLowerCase() === name.toLowerCase())){
-      alert("Category with same name exists");
-      return;
+      categories = categories.filter(c=>c.id!=id);
+    } else {
+      links = links.filter(l=>l.id!=id);
     }
-    const newCat = { id: uid("c"), name };
-    categories.push(newCat);
-    saveJSON(STORAGE_CATS, categories);
-    closeModal();
-    renderAll();
-  });
+
+    save(); closeModal(); render();
+  };
 }
 
-/* ----------------- utility ----------------- */
-function isValidURL(s) {
-  try {
-    const u = new URL(s);
-    return u.protocol === "http:" || u.protocol === "https:";
-  } catch(e){ return false; }
-}
+/* EVENTS */
+document.getElementById("btnAddCategory").onclick=openCatModal;
+document.getElementById("btnAddGlobalLink").onclick=()=>openLinkModal(categories[0]?.id);
+document.getElementById("btnDeleteItem").onclick=openDeleteModal;
 
-function escapeHtml(s){
-  return s ? s.replaceAll('"','&quot;').replaceAll("'",'&#39;') : "";
-}
-
-/* ----------------- top actions ----------------- */
-document.getElementById("btnAddCategory").addEventListener("click", openCategoryModal);
-document.getElementById("btnAddGlobalLink").addEventListener("click", ()=> openLinkModal(categories[0]?.id || null));
-
-backdrop.addEventListener("click", (e)=>{
-  if (e.target === backdrop) closeModal();
-});
-
-/* initial render */
-renderAll();
-
+render();
 </script>
 
 </body>
