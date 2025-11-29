@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Dashboard Links – v9.3</title>
+<title>Dashboard Links – v9.3.1</title>
 
 <!-- SheetJS for Import/Export -->
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
@@ -67,6 +67,7 @@ body::before{
 .btn{padding:9px 12px;border-radius:10px;border:1px solid rgba(10,20,40,0.06);background:linear-gradient(180deg,#fff,#f7fbff);cursor:pointer;font-weight:700;color:var(--primary)}
 .btn-primary{background:linear-gradient(90deg,var(--primary),var(--accent));color:#fff;border:0;box-shadow:0 8px 18px rgba(27,117,187,0.12)}
 .btn.disabled{opacity:0.42;pointer-events:none}
+.hidden{display:none !important}
 .status{padding:6px 10px;border-radius:10px;background:rgba(255,255,255,0.7);border:1px solid rgba(0,0,0,0.04);font-weight:600;color:var(--primary)}
 
 /* main panel */
@@ -76,7 +77,7 @@ body::before{
   -webkit-backdrop-filter: blur(8px);box-shadow:0 18px 40px rgba(16,35,70,0.04);border:1px solid rgba(255,255,255,0.6);
 }
 
-/* cards grid (Option A wide horizontal cards as earlier) */
+/* cards grid (wide) */
 .cards-grid{
   display:grid; grid-template-columns: repeat(3, 1fr); gap:18px;
   align-items:start;
@@ -129,7 +130,6 @@ body::before{
 input,select,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(10,20,40,0.06);margin-top:8px}
 
 /* helpers */
-.hidden{display:none !important}
 .hint{font-size:13px;color:var(--muted);margin-top:12px}
 
 /* focus / a11y */
@@ -144,7 +144,7 @@ input,select,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid
     <div class="brand">
       <div class="logo" title="EBWS"></div>
       <div>
-        <div class="title">Dashboard Links – v9.3</div>
+        <div class="title">Dashboard Links – v9.3.1</div>
         <div class="subtitle">Cards view (Admin editable) • Glass UI</div>
       </div>
     </div>
@@ -157,17 +157,17 @@ input,select,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid
   </div>
 
   <!-- TOOLBAR (Option A) -->
-  <div class="toolbar" role="toolbar" aria-label="Admin tools">
-    <div class="toolbar-left">
-      <button id="btnAddCard" class="btn disabled">+ Card</button>
-      <button id="btnAddLink" class="btn btn-primary disabled">+ Link</button>
-      <button id="btnDelete" class="btn disabled">Delete</button>
-      <button id="btnExport" class="btn disabled">Export</button>
-      <button id="btnImport" class="btn disabled">Import</button>
-      <button id="btnSettings" class="btn disabled">Settings</button>
+  <div class="toolbar" id="toolbarBar" role="toolbar" aria-label="Admin tools">
+    <div class="toolbar-left" id="toolbarLeft">
+      <button id="btnAddCard" class="btn hidden">+ Card</button>
+      <button id="btnAddLink" class="btn btn-primary hidden">+ Link</button>
+      <button id="btnDelete" class="btn hidden">Delete</button>
+      <button id="btnExport" class="btn hidden">Export</button>
+      <button id="btnImport" class="btn hidden">Import</button>
+      <button id="btnSettings" class="btn hidden">Settings</button>
     </div>
     <div class="toolbar-right">
-      <div class="status" style="background:transparent;border:none;color:var(--muted);font-weight:600">Admin controls</div>
+      <div id="toolbarNote" class="status" style="background:transparent;border:none;color:var(--muted);font-weight:600">Admin controls</div>
       <button id="btnLogout" class="btn hidden" title="Logout">🔓 Logout</button>
     </div>
   </div>
@@ -186,9 +186,9 @@ input,select,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid
 
 <script>
 /* ------------------ CONFIG ------------------ */
-const PIN_KEY = "dashboard_pin_v9_3";
-const SESSION_KEY = "dashboard_admin_session_v9_3";
-const CARDS_KEY = "dashboard_cards_v9_3";
+const PIN_KEY = "dashboard_pin_v9_3_1";
+const SESSION_KEY = "dashboard_admin_session_v9_3_1";
+const CARDS_KEY = "dashboard_cards_v9_3_1";
 const AUTO_LOCK_MS = 5*60*1000;
 const DEFAULT_PIN = "123456";
 let ADMIN_PIN = localStorage.getItem(PIN_KEY) || DEFAULT_PIN;
@@ -219,7 +219,6 @@ const cardsGrid = document.getElementById("cardsGrid");
 const searchTop = document.getElementById("searchTop");
 const modalBackdrop = document.getElementById("modalBackdrop");
 const modalContent = document.getElementById("modalContent");
-const toolbarButtons = ["btnAddCard","btnAddLink","btnDelete","btnExport","btnImport","btnSettings"];
 
 function saveAll(){ localStorage.setItem(CARDS_KEY, JSON.stringify(cards)); }
 
@@ -232,13 +231,14 @@ function stopWatcher(){ clearInterval(activityTimer); window.removeEventListener
 /* ------------------ UI STATE ------------------ */
 function updateToolbarState(){
   const admin = isAdmin();
-  toolbarButtons.forEach(id=>{
+  // show/hide toolbar buttons (for clean public UI)
+  const ids = ["btnAddCard","btnAddLink","btnDelete","btnExport","btnImport","btnSettings","btnLogout"];
+  ids.forEach(id=>{
     const el = document.getElementById(id);
     if(!el) return;
-    if(admin) el.classList.remove("disabled"); else el.classList.add("disabled");
+    if(admin) el.classList.remove("hidden"); else el.classList.add("hidden");
   });
   document.getElementById("adminStatus").classList.toggle("hidden", !admin);
-  document.getElementById("btnLogout").classList.toggle("hidden", !admin);
   document.getElementById("btnAdminToggle").textContent = admin ? "🔓 Logout" : "🔒 Admin Login";
 }
 
@@ -271,7 +271,7 @@ function render(){
       el.appendChild(act);
     }
 
-    // links area (expandable for ALL users now)
+    // links area (expandable for ALL users)
     const linksArea = document.createElement("div"); linksArea.className="links-area";
     const linksGrid = document.createElement("div"); linksGrid.className="links-grid";
 
@@ -357,13 +357,14 @@ function render(){
     cardsGrid.appendChild(el);
   });
 
-  // admin add-card tile always present in grid but only clickable for admin
-  const addCard = document.createElement("div"); addCard.className="add-card"; addCard.textContent="+ Add Card";
-  addCard.onclick = ()=> {
-    if(!isAdmin()) return alert("Admin only");
-    openAddCard();
-  };
-  cardsGrid.appendChild(addCard);
+  // Add Card tile — show ONLY for admin
+  if (isAdmin()) {
+    const addCard = document.createElement("div");
+    addCard.className = "add-card";
+    addCard.textContent = "+ Add Card";
+    addCard.onclick = () => openAddCard();
+    cardsGrid.appendChild(addCard);
+  }
 }
 
 /* ------------------ MODAL ------------------ */
@@ -550,16 +551,12 @@ function escapeHtml(s){ return (s||"").toString().replaceAll("&","&amp;").replac
 
 /* ------------------ Init ------------------ */
 function init(){
-  // wire toolbar button enabling toggles (ensures correct state immediately)
   updateToolbarState();
-
-  // wire btnAddCard for toolbar
+  // toolbar add card button wiring
   document.getElementById("btnAddCard").onclick = ()=> {
     if(!isAdmin()) return alert("Admin only");
     openAddCard();
   };
-
-  // wire btnSettings (already defined), btnExport/Import wired above
   render();
   if(isAdmin()) startWatcher();
 }
