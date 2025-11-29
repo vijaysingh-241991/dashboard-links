@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Dashboard Links – v9.2</title>
+<title>Dashboard Links – v9.3</title>
 
 <!-- SheetJS for Import/Export -->
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
@@ -11,39 +11,39 @@
 <style>
 :root{
   --bg:#eef6fb;
-  --card-bg: rgba(255,255,255,0.88);
-  --panel-bg: rgba(255,255,255,0.55);
+  --card-bg: rgba(255,255,255,0.92);
+  --panel-bg: rgba(255,255,255,0.56);
   --muted:#6e7c87;
   --primary:#1b75bb;
+  --accent:#0f5c94;
   --radius:14px;
   --shadow:0 10px 30px rgba(20,40,80,0.06);
   --glass-shadow: 0 18px 50px rgba(16,40,80,0.06);
-  font-family:Inter, "Segoe UI", Roboto, Arial, sans-serif;
+  font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
 }
 *{box-sizing:border-box}
-html,body{height:100%}
+html,body{height:100%;margin:0;padding:0}
 body{
-  margin:0;padding:28px;background:linear-gradient(180deg,#f6fbff 0%, #eef6fb 100%);
+  margin:0;padding:28px;background:linear-gradient(180deg,#f8fbff 0%, #eef6fb 100%);
   -webkit-font-smoothing:antialiased;color:#12202b;
+  position:relative;
+  min-height:100vh;
 }
 
 /* EBWS center glass banner */
 body::before{
   content:"";
-  position: absolute;
-  top:86px;
-  left:50%;
-  transform:translateX(-50%);
-  width:1100px;height:320px;
+  position:absolute; top:86px; left:50%; transform:translateX(-50%);
+  width:1100px; height:320px;
   background: url("banner.jpg") no-repeat center/contain;
-  opacity:0.11;
-  filter: blur(3px) saturate(0.95);
-  z-index:0;
-  pointer-events:none;
+  opacity:0.10; filter: blur(3px) saturate(0.95); z-index:0; pointer-events:none;
 }
 
-/* Header */
-.header{position:relative;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:14px;max-width:1200px;margin:0 auto 18px}
+/* Header row */
+.header-wrap{max-width:1200px;margin:0 auto;position:relative;z-index:6}
+.header{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;padding:6px 12px 6px 0;
+}
 .brand{display:flex;gap:12px;align-items:center}
 .logo{
   width:64px;height:64px;border-radius:14px;background:#fff center/cover no-repeat url("logo.jpg");
@@ -52,51 +52,59 @@ body::before{
 .title{font-weight:700;font-size:20px}
 .subtitle{font-size:13px;color:var(--muted)}
 
-/* Controls */
-.controls{display:flex;gap:10px;align-items:center}
-input.search{padding:10px 12px;border-radius:10px;border:1px solid rgba(10,20,40,0.06);width:300px}
-button{padding:9px 12px;border-radius:10px;border:1px solid rgba(10,20,40,0.06);background:linear-gradient(180deg,#fff,#f7fbff);cursor:pointer;font-weight:700;color:var(--primary)}
-.btn-primary{background:linear-gradient(90deg,var(--primary),#0f5c94);color:#fff;border:0;box-shadow:var(--glass-shadow)}
-.status{padding:7px 10px;border-radius:10px;background:rgba(255,255,255,0.7);border:1px solid rgba(0,0,0,0.04)}
+/* Toolbar (Option A) - glass bar under header */
+.toolbar {
+  margin-top:12px; max-width:1200px; margin-left:auto;margin-right:auto;
+  background: linear-gradient(180deg, rgba(255,255,255,0.72), rgba(255,255,255,0.6));
+  border-radius:14px; padding:12px 16px; display:flex; align-items:center; gap:12px;
+  box-shadow: var(--glass-shadow); border:1px solid rgba(255,255,255,0.7); z-index:6; position:relative;
+}
+.toolbar-left{display:flex;align-items:center;gap:12px}
+.search{padding:10px 12px;border-radius:10px;border:1px solid rgba(10,20,40,0.06);min-width:300px}
+.toolbar-right{display:flex;align-items:center;gap:8px;margin-left:auto}
 
-/* Main panel */
-.container{max-width:1200px;margin:0 auto;position:relative;z-index:5}
+/* toolbar buttons */
+.btn{padding:9px 12px;border-radius:10px;border:1px solid rgba(10,20,40,0.06);background:linear-gradient(180deg,#fff,#f7fbff);cursor:pointer;font-weight:700;color:var(--primary)}
+.btn-primary{background:linear-gradient(90deg,var(--primary),var(--accent));color:#fff;border:0;box-shadow:0 8px 18px rgba(27,117,187,0.12)}
+.btn.disabled{opacity:0.42;pointer-events:none}
+.status{padding:6px 10px;border-radius:10px;background:rgba(255,255,255,0.7);border:1px solid rgba(0,0,0,0.04);font-weight:600;color:var(--primary)}
+
+/* main panel */
+.container{max-width:1200px;margin:18px auto 60px;position:relative;z-index:5}
 .panel{
-  margin-top:12px;padding:18px;border-radius:18px;background:var(--panel-bg);backdrop-filter: blur(8px);
+  padding:18px;border-radius:18px;background:var(--panel-bg);backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);box-shadow:0 18px 40px rgba(16,35,70,0.04);border:1px solid rgba(255,255,255,0.6);
 }
 
-/* Cards grid */
+/* cards grid (Option A wide horizontal cards as earlier) */
 .cards-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:18px;
+  display:grid; grid-template-columns: repeat(3, 1fr); gap:18px;
+  align-items:start;
 }
-@media(max-width:1100px){.cards-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:700px){.cards-grid{grid-template-columns:1fr}}
+@media(max-width:1100px){ .cards-grid{grid-template-columns:repeat(2,1fr)} }
+@media(max-width:700px){ .cards-grid{grid-template-columns:1fr} }
 
-/* Card */
+/* card */
 .card{
-  background:var(--card-bg);border-radius:12px;padding:14px;min-height:120px;position:relative;
-  box-shadow:var(--shadow);border:1px solid rgba(10,20,40,0.03);overflow:visible;
-  transition:transform .18s ease,box-shadow .18s ease;
+  background:var(--card-bg); border-radius:12px; padding:14px; min-height:120px; position:relative;
+  box-shadow:var(--shadow); border:1px solid rgba(10,20,40,0.03); transition:transform .18s ease, box-shadow .18s ease;
 }
 .card:hover{transform:translateY(-6px);box-shadow:0 22px 48px rgba(20,40,80,0.08)}
 .card-head{display:flex;gap:12px;align-items:center}
-.card-icon{width:52px;height:52px;border-radius:10px;background:linear-gradient(135deg,var(--primary),#0f5c94);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:20px}
+.card-icon{width:52px;height:52px;border-radius:10px;background:linear-gradient(135deg,var(--primary),var(--accent));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:20px}
 .card-title{font-weight:800;font-size:16px}
 .card-sub{font-size:13px;color:var(--muted);margin-top:6px}
 
-/* Links area (expanded) */
+/* links area */
 .links-area{
-  margin-top:12px;border-radius:10px;padding:12px;background:rgba(245,250,255,0.85);border:1px solid rgba(10,30,60,0.03);
-  display:none;transition:all .18s ease;
+  margin-top:12px;border-radius:10px;padding:12px;background:rgba(245,250,255,0.86);border:1px solid rgba(10,30,60,0.03);
+  display:none; transition:all .18s ease; overflow:visible;
 }
 .links-grid{
-  display:grid;gap:12px;
+  display:grid; gap:12px;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
-@media(max-width:520px){.links-grid{grid-template-columns:1fr}}
+@media(max-width:520px){ .links-grid{grid-template-columns:1fr} }
 
 /* link tile */
 .link-tile{
@@ -107,50 +115,60 @@ button{padding:9px 12px;border-radius:10px;border:1px solid rgba(10,20,40,0.06);
 .link-title{font-weight:700}
 .link-url{font-size:12px;color:var(--muted);margin-top:8px;display:block}
 
-/* Admin small buttons */
+/* admin small buttons */
 .tile-actions{position:absolute;right:12px;top:12px;display:flex;gap:8px}
 .small-btn{padding:6px 8px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);background:rgba(255,255,255,0.85);cursor:pointer;font-weight:700;color:var(--primary)}
 .small-danger{background:#fff0f0;border:1px solid rgba(200,50,50,0.12);color:#c0392b}
 
-/* add-card tile (admin) */
+/* add-card tile */
 .add-card{display:flex;align-items:center;justify-content:center;border:2px dashed rgba(27,117,187,0.14);background:linear-gradient(180deg,rgba(255,255,255,0.7),rgba(245,250,255,0.7));border-radius:12px;min-height:120px;font-size:18px;color:var(--primary);cursor:pointer}
 
 /* modal */
 .modal-back{position:fixed;inset:0;background:rgba(0,0,0,0.45);display:none;align-items:center;justify-content:center;padding:20px;z-index:9999}
-.modal{background:#fff;padding:16px;border-radius:12px;max-width:460px;width:100%}
+.modal{background:#fff;padding:16px;border-radius:12px;max-width:520px;width:100%}
 input,select,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(10,20,40,0.06);margin-top:8px}
 
-/* hidden helper */
+/* helpers */
 .hidden{display:none !important}
-
-/* footer hint */
 .hint{font-size:13px;color:var(--muted);margin-top:12px}
 
+/* focus / a11y */
+:focus{outline:2px solid rgba(27,117,187,0.16);outline-offset:2px}
 </style>
 </head>
 <body>
 
 <!-- HEADER -->
-<div class="header">
-  <div class="brand">
-    <div class="logo" title="Dashboard"></div>
-    <div>
-      <div class="title">Dashboard Links – v9.2</div>
-      <div class="subtitle">Cards view (Admin editable) • Glass UI</div>
+<div class="header-wrap">
+  <div class="header">
+    <div class="brand">
+      <div class="logo" title="EBWS"></div>
+      <div>
+        <div class="title">Dashboard Links – v9.3</div>
+        <div class="subtitle">Cards view (Admin editable) • Glass UI</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:12px">
+      <input id="searchTop" class="search" placeholder="Search links or cards..." />
+      <button id="btnAdminToggle" class="btn">🔒 Admin Login</button>
+      <span id="adminStatus" class="status hidden">Admin</span>
     </div>
   </div>
 
-  <div class="controls">
-    <input class="search" id="searchBox" placeholder="Search links or cards..." />
-    <div>
-      <button id="btnAddCard" style="display:none">+ Card</button>
-      <button id="btnAddLink" class="btn-primary" style="display:none">+ Link</button>
-      <button id="btnDelete" style="display:none">Delete</button>
-      <button id="btnExport" style="display:none">Export</button>
-      <button id="btnImport" style="display:none">Import</button>
-      <button id="btnSettings" style="display:none">Settings</button>
-      <button id="btnAdminToggle">🔒 Admin Login</button>
-      <span id="adminStatus" class="status" style="display:none;margin-left:8px">Admin</span>
+  <!-- TOOLBAR (Option A) -->
+  <div class="toolbar" role="toolbar" aria-label="Admin tools">
+    <div class="toolbar-left">
+      <button id="btnAddCard" class="btn disabled">+ Card</button>
+      <button id="btnAddLink" class="btn btn-primary disabled">+ Link</button>
+      <button id="btnDelete" class="btn disabled">Delete</button>
+      <button id="btnExport" class="btn disabled">Export</button>
+      <button id="btnImport" class="btn disabled">Import</button>
+      <button id="btnSettings" class="btn disabled">Settings</button>
+    </div>
+    <div class="toolbar-right">
+      <div class="status" style="background:transparent;border:none;color:var(--muted);font-weight:600">Admin controls</div>
+      <button id="btnLogout" class="btn hidden" title="Logout">🔓 Logout</button>
     </div>
   </div>
 </div>
@@ -167,15 +185,15 @@ input,select,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid
 <div class="modal-back" id="modalBackdrop"><div class="modal" id="modalContent"></div></div>
 
 <script>
-/* ----------- CONFIG & STORAGE KEYS ----------- */
-const PIN_KEY = "dashboard_pin_v9_2";
-const SESSION_KEY = "dashboard_admin_session_v9_2";
-const CARDS_KEY = "dashboard_cards_v9_2";
+/* ------------------ CONFIG ------------------ */
+const PIN_KEY = "dashboard_pin_v9_3";
+const SESSION_KEY = "dashboard_admin_session_v9_3";
+const CARDS_KEY = "dashboard_cards_v9_3";
 const AUTO_LOCK_MS = 5*60*1000;
 const DEFAULT_PIN = "123456";
 let ADMIN_PIN = localStorage.getItem(PIN_KEY) || DEFAULT_PIN;
 
-/* ----------- SAMPLE DATA / Load ----------- */
+/* ------------------ DATA LOAD ------------------ */
 let cards = JSON.parse(localStorage.getItem(CARDS_KEY) || "null");
 if(!cards){
   cards = [
@@ -188,19 +206,20 @@ if(!cards){
       {id:"l6", title:"Bhiwadi_MRP", url:"http://192.168.11.1/mrp-ebws/"},
       {id:"l7", title:"Bhiwadi_QAS", url:"http://192.168.11.1/qas-ebws/"}
     ]},
-    {id:"card2", name:"Finance", icon:"💰", links:[]},
-    {id:"card3", name:"HR", icon:"👨‍💼", links:[]}
+    {id:"card2", name:"HR", icon:"👨‍💼", links:[]},
+    {id:"card3", name:"Finance", icon:"💰", links:[]}
   ];
   localStorage.setItem(CARDS_KEY, JSON.stringify(cards));
 }
 
-/* ----------- Helpers ----------- */
+/* ------------------ HELPERS ------------------ */
 const uid = ()=> "id"+Math.random().toString(36).slice(2,9);
 const isAdmin = ()=> sessionStorage.getItem(SESSION_KEY) === "true";
 const cardsGrid = document.getElementById("cardsGrid");
-const searchBox = document.getElementById("searchBox");
+const searchTop = document.getElementById("searchTop");
 const modalBackdrop = document.getElementById("modalBackdrop");
 const modalContent = document.getElementById("modalContent");
+const toolbarButtons = ["btnAddCard","btnAddLink","btnDelete","btnExport","btnImport","btnSettings"];
 
 function saveAll(){ localStorage.setItem(CARDS_KEY, JSON.stringify(cards)); }
 
@@ -210,40 +229,40 @@ function resetActivity(){ if(!isAdmin()) return; sessionStorage.setItem("lastAct
 function startWatcher(){ clearInterval(activityTimer); activityTimer=setInterval(()=>{ if(!isAdmin()) return; const last = parseInt(sessionStorage.getItem("lastActivity")||0); if(Date.now()-last > AUTO_LOCK_MS){ alert("Session locked due to inactivity (5 min)"); logoutAdmin(); render(); } },4000); window.addEventListener("mousemove", resetActivity); window.addEventListener("keydown", resetActivity); window.addEventListener("click", resetActivity); }
 function stopWatcher(){ clearInterval(activityTimer); window.removeEventListener("mousemove", resetActivity); window.removeEventListener("keydown", resetActivity); window.removeEventListener("click", resetActivity); }
 
-/* admin controls list */
-const ctrlIds = ["btnAddCard","btnAddLink","btnDelete","btnExport","btnImport","btnSettings"];
-
-/* update controls */
-function updateControls(){
+/* ------------------ UI STATE ------------------ */
+function updateToolbarState(){
   const admin = isAdmin();
-  ctrlIds.forEach(id=>{ const e=document.getElementById(id); if(e) e.style.display = admin? "": "none"; });
-  document.getElementById("adminStatus").style.display = admin? "": "none";
-  document.getElementById("btnAdminToggle").textContent = admin? "🔓 Logout" : "🔒 Admin Login";
+  toolbarButtons.forEach(id=>{
+    const el = document.getElementById(id);
+    if(!el) return;
+    if(admin) el.classList.remove("disabled"); else el.classList.add("disabled");
+  });
+  document.getElementById("adminStatus").classList.toggle("hidden", !admin);
+  document.getElementById("btnLogout").classList.toggle("hidden", !admin);
+  document.getElementById("btnAdminToggle").textContent = admin ? "🔓 Logout" : "🔒 Admin Login";
 }
 
-/* ----------- Render ----------- */
+/* ------------------ RENDER ------------------ */
 function render(){
-  updateControls();
-  const q = (searchBox.value||"").toLowerCase();
+  updateToolbarState();
+  const q = (searchTop.value||"").toLowerCase();
   cardsGrid.innerHTML = "";
 
   cards.forEach(card=>{
-    // filter by search: card name or link title
-    const matches = card.name.toLowerCase().includes(q) || card.links.some(l=> l.title.toLowerCase().includes(q));
+    const matches = card.name.toLowerCase().includes(q) || card.links.some(l => l.title.toLowerCase().includes(q));
     if(q && !matches) return;
 
     const el = document.createElement("div"); el.className = "card"; el.dataset.cardId = card.id;
 
-    // head
     const head = document.createElement("div"); head.className = "card-head";
     head.innerHTML = `<div class="card-icon">${card.icon || "🔗"}</div>
                       <div style="flex:1">
-                        <div class="card-title">${card.name}</div>
+                        <div class="card-title">${escapeHtml(card.name)}</div>
                         <div class="card-sub">${card.links.length} links</div>
                       </div>`;
     el.appendChild(head);
 
-    // admin actions
+    // admin actions overlay (edit/delete) - visible only to admin
     if(isAdmin()){
       const act = document.createElement("div"); act.className="tile-actions";
       const edit = document.createElement("button"); edit.className="small-btn"; edit.textContent="Edit"; edit.onclick = (ev)=>{ ev.stopPropagation(); openEditCard(card.id); };
@@ -252,32 +271,32 @@ function render(){
       el.appendChild(act);
     }
 
-    // links area (expanded only for admin when they click)
+    // links area (expandable for ALL users now)
     const linksArea = document.createElement("div"); linksArea.className="links-area";
     const linksGrid = document.createElement("div"); linksGrid.className="links-grid";
 
-    // populate links (title visible to everyone; URL visible only for admin)
     card.links.forEach(l=>{
       const lt = document.createElement("div"); lt.className="link-tile"; lt.dataset.linkId = l.id;
+      // show title for all users; show URL only for admin
       lt.innerHTML = `<div class="link-title">${escapeHtml(l.title)}</div>
-                      <div class="link-url ${isAdmin()? "": "hidden"}">${escapeHtml(l.url)}</div>`;
+                      <div class="link-url ${isAdmin() ? '' : 'hidden'}">${escapeHtml(l.url)}</div>`;
       lt.onclick = ()=> window.open(l.url, "_blank");
       if(isAdmin()){
-        // admin link actions & drag
         const la = document.createElement("div"); la.style.position="absolute"; la.style.right="12px"; la.style.bottom="12px"; la.style.display="flex"; la.style.gap="8px";
         const editL = document.createElement("button"); editL.className="small-btn"; editL.textContent="Edit"; editL.onclick = (ev)=>{ ev.stopPropagation(); openEditLink(card.id, l.id); };
         const delL = document.createElement("button"); delL.className="small-btn small-danger"; delL.textContent="Del"; delL.onclick = (ev)=>{ ev.stopPropagation(); if(confirm("Delete link?")) deleteLink(card.id, l.id); };
         la.appendChild(editL); la.appendChild(delL); lt.appendChild(la);
 
+        // drag link
         lt.draggable = true;
         lt.addEventListener("dragstart", ev => {
-          ev.dataTransfer.setData("text/plain", JSON.stringify({type:"link",cardId: card.id,linkId: l.id}));
+          ev.dataTransfer.setData("text/plain", JSON.stringify({type:"link", cardId: card.id, linkId: l.id}));
         });
       }
       linksGrid.appendChild(lt);
     });
 
-    // admin: add link tile
+    // admin add-link tile inside expanded area
     if(isAdmin()){
       const addTile = document.createElement("div"); addTile.className="link-tile"; addTile.style.justifyContent="center"; addTile.style.alignItems="center"; addTile.style.fontSize="26px"; addTile.textContent="+";
       addTile.onclick = (ev)=>{ ev.stopPropagation(); openAddLink(card.id); };
@@ -287,31 +306,33 @@ function render(){
     linksArea.appendChild(linksGrid);
     el.appendChild(linksArea);
 
-    // footer
-    const foot = document.createElement("div"); foot.className="card-footer"; foot.style.marginTop="12px"; foot.style.display="flex"; foot.style.justifyContent="space-between";
-    const left = document.createElement("div"); left.className="muted"; left.textContent = isAdmin()? "Click to expand" : ""; // public: no hint
+    // footer hint
+    const foot = document.createElement("div"); foot.style.marginTop="12px"; foot.style.display="flex"; foot.style.justifyContent="space-between";
+    const left = document.createElement("div"); left.className="muted"; left.textContent = "Click to expand";
     foot.appendChild(left);
     el.appendChild(foot);
 
-    // click: toggle expand only if admin
+    // click toggles expand for everyone (public & admin)
     el.addEventListener("click", ev=>{
-      if(!isAdmin()) return; // public cannot expand
-      const expanded = linksArea.style.display === "block";
-      // collapse others
+      // if click on admin buttons, skip
+      if(ev.target.closest('.small-btn')) return;
+      const openNow = linksArea.style.display === "block";
       document.querySelectorAll('.links-area').forEach(x=> x.style.display = "none");
-      if(!expanded) linksArea.style.display = "block"; else linksArea.style.display = "none";
+      if(!openNow) linksArea.style.display = "block"; else linksArea.style.display = "none";
+      // update last activity for admin if admin
+      if(isAdmin()) sessionStorage.setItem("lastActivity", Date.now());
     });
 
-    // drag-drop for cards (admin)
+    // card drag/drop for admin
     if(isAdmin()){
       el.draggable = true;
       el.addEventListener("dragstart", ev=>{
-        ev.dataTransfer.setData("text/plain", JSON.stringify({type:"card",cardId: card.id}));
+        ev.dataTransfer.setData("text/plain", JSON.stringify({type:"card", cardId: card.id}));
       });
-      el.addEventListener("dragover", ev=> { ev.preventDefault(); el.style.opacity = "0.7"; });
-      el.addEventListener("dragleave", ()=> el.style.opacity = "1");
+      el.addEventListener("dragover", ev=> { ev.preventDefault(); el.style.opacity="0.7"; });
+      el.addEventListener("dragleave", ()=> el.style.opacity="1");
       el.addEventListener("drop", ev=>{
-        ev.preventDefault(); el.style.opacity = "1";
+        ev.preventDefault(); el.style.opacity="1";
         try{
           const data = JSON.parse(ev.dataTransfer.getData("text/plain") || "{}");
           if(data.type === "card" && data.cardId !== card.id){
@@ -336,29 +357,30 @@ function render(){
     cardsGrid.appendChild(el);
   });
 
-  // admin add-card tile
-  if(isAdmin()){
-    const addCard = document.createElement("div"); addCard.className="add-card"; addCard.textContent="+ Add Card";
-    addCard.onclick = ()=> openAddCard();
-    cardsGrid.appendChild(addCard);
-  }
+  // admin add-card tile always present in grid but only clickable for admin
+  const addCard = document.createElement("div"); addCard.className="add-card"; addCard.textContent="+ Add Card";
+  addCard.onclick = ()=> {
+    if(!isAdmin()) return alert("Admin only");
+    openAddCard();
+  };
+  cardsGrid.appendChild(addCard);
 }
 
-/* ---------- Modal utils ---------- */
+/* ------------------ MODAL ------------------ */
 function openModal(html){ modalContent.innerHTML = html; modalBackdrop.style.display = "flex"; }
 function closeModal(){ modalBackdrop.style.display = "none"; modalContent.innerHTML = ""; }
 modalBackdrop.onclick = (e)=> { if(e.target === modalBackdrop) closeModal(); };
 
-/* ---------- CRUD ---------- */
+/* ------------------ CRUD ------------------ */
 function openAddCard(){
   openModal(`<h3>Add Card</h3>
     <input id="cardName" placeholder="Card name (eg. IT)">
-    <input id="cardIcon" placeholder="Icon emoji (eg. 💻)">
-    <div style="margin-top:12px"><button id="saveCard" class="btn-primary">Save</button></div>`);
+    <input id="cardIcon" placeholder="Icon (emoji or text)">
+    <div style="margin-top:12px"><button id="saveCard" class="btn btn-primary">Save</button></div>`);
   document.getElementById("saveCard").onclick = ()=>{
     const n = document.getElementById("cardName").value.trim();
     const ic = document.getElementById("cardIcon").value.trim() || "🔗";
-    if(!n) return alert("Enter name");
+    if(!n) return alert("Enter card name");
     cards.push({id:uid(),name:n,icon:ic,links:[]});
     saveAll(); closeModal(); render();
   };
@@ -368,7 +390,7 @@ function openEditCard(cardId){
   openModal(`<h3>Edit Card</h3>
     <input id="cardName" value="${escapeHtml(c.name)}">
     <input id="cardIcon" value="${escapeHtml(c.icon||'🔗')}">
-    <div style="margin-top:12px"><button id="saveCard" class="btn-primary">Save</button></div>`);
+    <div style="margin-top:12px"><button id="saveCard" class="btn btn-primary">Save</button></div>`);
   document.getElementById("saveCard").onclick = ()=>{
     c.name = document.getElementById("cardName").value.trim();
     c.icon = document.getElementById("cardIcon").value.trim() || "🔗";
@@ -386,7 +408,7 @@ function openAddLink(cardId){
   openModal(`<h3>Add Link to ${escapeHtml(c.name)}</h3>
     <input id="lTitle" placeholder="Title">
     <input id="lUrl" placeholder="https://example.com">
-    <div style="margin-top:12px"><button id="saveLink" class="btn-primary">Save</button></div>`);
+    <div style="margin-top:12px"><button id="saveLink" class="btn btn-primary">Save</button></div>`);
   document.getElementById("saveLink").onclick = ()=>{
     const t = document.getElementById("lTitle").value.trim();
     const u = document.getElementById("lUrl").value.trim();
@@ -400,7 +422,7 @@ function openEditLink(cardId, linkId){
   openModal(`<h3>Edit Link</h3>
     <input id="lTitle" value="${escapeHtml(l.title)}">
     <input id="lUrl" value="${escapeHtml(l.url)}">
-    <div style="margin-top:12px"><button id="saveLink" class="btn-primary">Save</button></div>`);
+    <div style="margin-top:12px"><button id="saveLink" class="btn btn-primary">Save</button></div>`);
   document.getElementById("saveLink").onclick = ()=>{
     l.title = document.getElementById("lTitle").value.trim();
     l.url = document.getElementById("lUrl").value.trim();
@@ -411,15 +433,15 @@ function deleteLink(cardId, linkId){
   const c = cards.find(x=>x.id===cardId); c.links = c.links.filter(x=>x.id!==linkId); saveAll(); render();
 }
 
-/* ---------- Admin Login / PIN / Settings ---------- */
+/* ------------------ Admin Login / PIN / Settings ------------------ */
 document.getElementById("btnAdminToggle").onclick = ()=>{
   if(isAdmin()){
     if(confirm("Logout admin?")) logoutAdmin();
     return;
   }
   openModal(`<h3>Admin Login (6-digit PIN)</h3>
-    <input id="pinInput" class="pin-input" maxlength="6" placeholder="●●●●●●">
-    <div style="margin-top:12px"><button id="doLogin" class="btn-primary">Login</button></div>`);
+    <input id="pinInput" maxlength="6" placeholder="●●●●●●">
+    <div style="margin-top:12px"><button id="doLogin" class="btn btn-primary">Login</button></div>`);
   document.getElementById("doLogin").onclick = ()=>{
     const v = (document.getElementById("pinInput").value||"").trim();
     if(v === ADMIN_PIN){
@@ -428,16 +450,20 @@ document.getElementById("btnAdminToggle").onclick = ()=>{
   };
 };
 
-function logoutAdmin(){ sessionStorage.removeItem(SESSION_KEY); stopWatcher(); render(); }
+function logoutAdmin(){
+  sessionStorage.removeItem(SESSION_KEY);
+  stopWatcher();
+  render();
+}
 
-/* Settings change PIN */
+/* Settings change PIN (toolbar settings) */
 document.getElementById("btnSettings").onclick = ()=>{
   if(!isAdmin()) return alert("Admin only");
   openModal(`<h3>Settings — Change PIN</h3>
-    <input id="oldPin" class="pin-input" maxlength="6" placeholder="Current PIN">
-    <input id="newPin" class="pin-input" maxlength="6" placeholder="New PIN">
-    <input id="newPin2" class="pin-input" maxlength="6" placeholder="Confirm PIN">
-    <div style="margin-top:12px"><button id="savePin" class="btn-primary">Save</button></div>`);
+    <input id="oldPin" maxlength="6" placeholder="Current PIN">
+    <input id="newPin" maxlength="6" placeholder="New PIN">
+    <input id="newPin2" maxlength="6" placeholder="Confirm PIN">
+    <div style="margin-top:12px"><button id="savePin" class="btn btn-primary">Save</button></div>`);
   document.getElementById("savePin").onclick = ()=>{
     const o = (document.getElementById("oldPin").value||"").trim();
     const n = (document.getElementById("newPin").value||"").trim();
@@ -449,7 +475,7 @@ document.getElementById("btnSettings").onclick = ()=>{
   };
 };
 
-/* ---------- Export / Import (Excel) ---------- */
+/* ------------------ Export/Import ------------------ */
 document.getElementById("btnExport").onclick = ()=>{
   if(!isAdmin()) return alert("Admin only");
   const rows = []; cards.forEach(c=> c.links.forEach(l=> rows.push({Card: c.name, Title: l.title, URL: l.url})));
@@ -459,7 +485,7 @@ document.getElementById("btnExport").onclick = ()=>{
 
 document.getElementById("btnImport").onclick = ()=>{
   if(!isAdmin()) return alert("Admin only");
-  openModal(`<h3>Import (CSV/XLSX)</h3><div class="muted">Columns: Card, Title, URL</div><input id="fileImp" type="file" accept=".csv,.xlsx"><div style="margin-top:12px"><button id="doImp" class="btn-primary">Import</button></div>`);
+  openModal(`<h3>Import (CSV/XLSX)</h3><div class="muted">Columns: Card, Title, URL</div><input id="fileImp" type="file" accept=".csv,.xlsx"><div style="margin-top:12px"><button id="doImp" class="btn btn-primary">Import</button></div>`);
   document.getElementById("doImp").onclick = ()=>{
     const f = document.getElementById("fileImp").files[0]; if(!f) return alert("Choose file");
     const r = new FileReader();
@@ -488,20 +514,20 @@ document.getElementById("btnImport").onclick = ()=>{
   };
 };
 
-/* ---------- Top add link (opens select) ---------- */
+/* ------------------ Top Add Link (toolbar) ------------------ */
 document.getElementById("btnAddLink").onclick = ()=>{
   if(!isAdmin()) return alert("Admin only");
-  openModal(`<h3>Add Link</h3><select id="selCard">${cards.map(c=>`<option value="${c.id}">${escapeHtml(c.name)}</option>`).join('')}</select><input id="lTitle" placeholder="Title"><input id="lUrl" placeholder="https://example.com"><div style="margin-top:12px"><button id="saveLinkTop" class="btn-primary">Save</button></div>`);
+  openModal(`<h3>Add Link</h3><select id="selCard">${cards.map(c=>`<option value="${c.id}">${escapeHtml(c.name)}</option>`).join('')}</select><input id="lTitle" placeholder="Title"><input id="lUrl" placeholder="https://example.com"><div style="margin-top:12px"><button id="saveLinkTop" class="btn btn-primary">Save</button></div>`);
   document.getElementById("saveLinkTop").onclick = ()=>{
     const cid = document.getElementById("selCard").value; const t = document.getElementById("lTitle").value.trim(); const u = document.getElementById("lUrl").value.trim();
     if(!t||!u) return alert("All fields required"); const c = cards.find(x=>x.id===cid); c.links.push({id:uid(),title:t,url:u}); saveAll(); closeModal(); render();
   };
 };
 
-/* ---------- Delete modal ---------- */
+/* ------------------ Delete modal ------------------ */
 document.getElementById("btnDelete").onclick = ()=>{
   if(!isAdmin()) return alert("Admin only");
-  openModal(`<h3>Delete</h3><label><input type="radio" name="del" value="card" checked> Card</label><br><label><input type="radio" name="del" value="link"> Link</label><div id="delWrap" style="margin-top:10px"><select id="delSel">${cards.map(c=>`<option value="${c.id}">${escapeHtml(c.name)}</option>`).join('')}</select></div><div style="margin-top:12px"><button id="doDel" class="btn-danger">Delete</button></div>`);
+  openModal(`<h3>Delete</h3><label><input type="radio" name="del" value="card" checked> Card</label><br><label><input type="radio" name="del" value="link"> Link</label><div id="delWrap" style="margin-top:10px"><select id="delSel">${cards.map(c=>`<option value="${c.id}">${escapeHtml(c.name)}</option>`).join('')}</select></div><div style="margin-top:12px"><button id="doDel" class="btn btn-danger">Delete</button></div>`);
   document.querySelectorAll("input[name='del']").forEach(r=> r.onchange = ()=>{
     if(r.checked){
       if(r.value==="card"){ document.getElementById("delWrap").innerHTML = `<select id="delSel">${cards.map(c=>`<option value="${c.id}">${escapeHtml(c.name)}</option>`).join('')}</select>`; }
@@ -516,15 +542,28 @@ document.getElementById("btnDelete").onclick = ()=>{
   };
 };
 
-/* ---------- Search ---------- */
-searchBox.addEventListener("input", ()=> render());
+/* ------------------ Search ------------------ */
+searchTop.addEventListener("input", ()=> render());
 
-/* ---------- Utility ---------- */
+/* ------------------ Utils ------------------ */
 function escapeHtml(s){ return (s||"").toString().replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;"); }
 
-/* ---------- Init ---------- */
-render(); updateControls();
-if(isAdmin()) startWatcher();
+/* ------------------ Init ------------------ */
+function init(){
+  // wire toolbar button enabling toggles (ensures correct state immediately)
+  updateToolbarState();
+
+  // wire btnAddCard for toolbar
+  document.getElementById("btnAddCard").onclick = ()=> {
+    if(!isAdmin()) return alert("Admin only");
+    openAddCard();
+  };
+
+  // wire btnSettings (already defined), btnExport/Import wired above
+  render();
+  if(isAdmin()) startWatcher();
+}
+init();
 
 </script>
 </body>
