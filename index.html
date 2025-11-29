@@ -3,131 +3,209 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Dashboard Links - Pro v4</title>
+<title>Dashboard Links - Professional v5</title>
+
+<!-- Excel Import/Export Library -->
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 
 <style>
-  :root{
-    --bg:#eef6fb;
-    --card:#ffffff;
-    --accent:#1b75bb;
-    --accent-2:#025e9a;
-    --muted:#6b7785;
-    --glass: rgba(255,255,255,0.6);
-    --radius:14px;
-  }
-  *{box-sizing:border-box}
-  body{
-    margin:0;
-    font-family: Inter, "Segoe UI", Roboto, Arial;
-    background: linear-gradient(180deg,var(--bg),#eef3f8);
-    color:#172033;
-    padding:28px;
+  :root {
+    --primary: #1b75bb;
+    --primary-dark: #0f5c94;
+    --bg: #f4f8fc;
+    --card-bg: #ffffff;
+    --border: #dbe7f3;
+    --text-main: #1b2e3c;
+    --text-muted: #6e7c87;
+    --radius: 12px;
   }
 
-  header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    max-width:1100px;
-    margin:0 auto 22px;
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: "Segoe UI", Inter, Arial;
+    background: var(--bg);
+    color: var(--text-main);
+    padding: 30px;
   }
 
-  .brand{
-    display:flex;align-items:center;gap:14px;
-  }
-  .logo{
-    width:52px;height:52px;border-radius:12px;
-    background:linear-gradient(135deg,var(--accent),var(--accent-2));
-    color:white;display:flex;align-items:center;justify-content:center;
-    font-weight:700;font-size:22px;
+  header {
+    max-width: 1150px;
+    margin: 0 auto 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
-  .controls{display:flex;gap:10px;align-items:center}
-
-  button.btn{
-    padding:10px 14px;border-radius:10px;border:0;cursor:pointer;font-weight:600;
-    background:linear-gradient(90deg,var(--accent-2),var(--accent));color:white;
-  }
-  button.ghost{
-    background:transparent;border:1px solid rgba(23,32,51,0.06);
-    padding:8px 12px;border-radius:10px;font-weight:600;cursor:pointer;
-    color:var(--accent-2);
+  .brand {
+    display: flex;
+    gap: 14px;
+    align-items: center;
   }
 
-  main{max-width:1100px;margin:0 auto}
-
-  /* category */
-  .category-row{
-    margin-top:22px;
-  }
-  .category-header{
-    display:flex;align-items:center;gap:12px;
-  }
-
-  .cat-bubble{
-    width:44px;height:44px;border-radius:10px;background:var(--glass);
-    display:flex;align-items:center;justify-content:center;font-size:20px;
+  .logo {
+    width: 55px;
+    height: 55px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    font-weight: 700;
   }
 
-  .cat-title{font-size:20px;font-weight:700;margin-bottom:4px}
-  .muted{font-size:13px;color:var(--muted)}
-
-  /* cards */
-  .cards{
-    display:grid;
-    grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
-    gap:14px;
-    margin-top:12px;
+  .controls {
+    display: flex;
+    gap: 12px;
   }
 
-  .card{
-    background: linear-gradient(180deg, rgba(255,255,255,0.9), var(--card));
-    border-radius:12px;padding:14px;cursor:pointer;position:relative;
-    min-height:86px;
-    box-shadow: 0 6px 18px rgba(25,45,70,0.06);
-    transition:transform .15s ease;
-  }
-  .card:hover{transform:translateY(-6px);}
-
-  .card-icon{
-    width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));
-    color:white;display:flex;align-items:center;justify-content:center;font-size:20px;
-    margin-bottom:10px;
+  button {
+    padding: 10px 14px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    font-weight: 600;
+    background: white;
+    color: var(--primary-dark);
   }
 
-  .card-title{font-weight:700;font-size:15px}
-  .card-url{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-
-  /* add card */
-  .add-card{
-    display:flex;align-items:center;justify-content:center;
-    font-size:34px;
-    background:linear-gradient(135deg,#e8f6ff,#ffffff);
-    color:var(--accent-2);
-    border:2px dashed rgba(27,117,187,0.12);
+  .btn-primary {
+    background: var(--primary);
+    color: white;
+    border: none;
   }
 
-  /* modal */
-  .modal-backdrop{
-    position:fixed;inset:0;background:rgba(0,0,0,0.4);
-    display:none;align-items:center;justify-content:center;padding:20px;
-  }
-  .modal{
-    width:400px;max-width:100%;background:white;border-radius:12px;padding:18px;
-  }
-  .modal h3{margin:0 0 10px}
-
-  input, select{
-    width:100%;padding:10px;margin-top:6px;border-radius:8px;
-    border:1px solid #ccd6e3;font-size:14px;
+  .btn-danger {
+    background: #c0392b;
+    color: white;
+    border: none;
   }
 
-  .row{display:flex;gap:10px;margin-top:14px;justify-content:flex-end}
-
-  /* responsive */
-  @media(max-width:640px){
-    .cards{grid-template-columns: repeat(auto-fill,minmax(160px,1fr))}
+  .btn-icon {
+    font-size: 17px;
   }
+
+  main {
+    max-width: 1150px;
+    margin: 0 auto;
+  }
+
+  /* Category */
+  .category-row {
+    margin-top: 22px;
+  }
+
+  .category-header {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+  }
+
+  .cat-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 10px;
+    background: #eaf3fc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+  }
+
+  .cat-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .muted {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  /* Cards */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
+    gap: 14px;
+    margin-top: 14px;
+  }
+
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    min-height: 90px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(16, 41, 66, 0.05);
+    transition: all 0.15s;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 22px rgba(16, 41, 66, 0.08);
+  }
+
+  .card-title {
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .card-url {
+    font-size: 13px;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .add-card {
+    background: #eef5ff;
+    border: 2px dashed var(--primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 34px;
+  }
+
+  /* Modal */
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .modal {
+    background: white;
+    padding: 20px;
+    border-radius: var(--radius);
+    width: 400px;
+    max-width: 100%;
+  }
+
+  input, select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+  }
+
+  .row {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 18px;
+  }
+
 </style>
 </head>
 <body>
@@ -136,193 +214,266 @@
   <div class="brand">
     <div class="logo">DL</div>
     <div>
-      <div class="cat-title" style="font-size:20px;">Dashboard Links - Pro</div>
-      <div class="muted">Fast access to your teams & tools</div>
+      <div class="cat-title">Dashboard Links – v5</div>
+      <div class="muted">Professional Edition</div>
     </div>
   </div>
 
   <div class="controls">
-    <button class="ghost" id="btnAddCategory">+ Add Category</button>
-    <button class="btn" id="btnAddGlobalLink">+ Add Link</button>
-    <button class="ghost" id="btnDeleteItem">🗑 Delete</button>
+    <button id="btnAddCategory">+ Add Category</button>
+    <button class="btn-primary" id="btnAddLink">+ Add Link</button>
+    <button id="btnDelete">🗑 Delete</button>
+    <button id="btnExport">📤 Export</button>
+    <button id="btnImport">📥 Import</button>
   </div>
 </header>
 
 <main id="mainArea"></main>
 
-<!-- MODAL -->
+<!-- Modal -->
 <div class="modal-backdrop" id="modalBackdrop">
   <div class="modal" id="modalContent"></div>
 </div>
 
 <script>
 /* STORAGE */
-const STORAGE_CATS = "cats_v4";
-const STORAGE_LINKS = "links_v4";
+const CATS_KEY = "cats_v5";
+const LINKS_KEY = "links_v5";
 
-let categories = JSON.parse(localStorage.getItem(STORAGE_CATS)) || [
+let categories = JSON.parse(localStorage.getItem(CATS_KEY)) || [
   {id:"c1",name:"HR"},
   {id:"c2",name:"Production"},
   {id:"c3",name:"Finance"},
   {id:"c4",name:"IT"},
   {id:"c5",name:"Admin"}
 ];
-let links = JSON.parse(localStorage.getItem(STORAGE_LINKS)) || [];
 
-function save(){ localStorage.setItem(STORAGE_CATS,JSON.stringify(categories)); localStorage.setItem(STORAGE_LINKS,JSON.stringify(links)); }
+let links = JSON.parse(localStorage.getItem(LINKS_KEY)) || [];
 
-function iconFor(cat){
-  const map={HR:"👨‍💼",Production:"🏭",Finance:"💰",IT:"💻",Admin:"🏢"};
-  return map[cat] || "🔗";
-}
+/* Save */
+const save = () => {
+  localStorage.setItem(CATS_KEY, JSON.stringify(categories));
+  localStorage.setItem(LINKS_KEY, JSON.stringify(links));
+};
 
-function uid(){return "id"+Math.random().toString(36).slice(2);}
+/* Icons */
+const getIcon = (cat) => ({
+  HR:"👨‍💼", Production:"🏭", Finance:"💰",
+  IT:"💻", Admin:"🏢"
+}[cat] || "🔗");
+
+/* Unique ID */
+const uid = () => "id"+Math.random().toString(36).slice(2);
 
 /* RENDER */
-function render(){
-  const main=document.getElementById("mainArea");
-  main.innerHTML="";
+function render() {
+  const main = document.getElementById("mainArea");
+  main.innerHTML = "";
 
-  categories.forEach(cat=>{
-    const row=document.createElement("div");
-    row.className="category-row";
+  categories.forEach(cat => {
+    const row = document.createElement("div");
+    row.className = "category-row";
 
-    const head=document.createElement("div");
-    head.className="category-header";
-    head.innerHTML=`
-      <div class="cat-bubble">${iconFor(cat.name)}</div>
-      <div>
-        <div class="cat-title">${cat.name}</div>
-        <div class="muted">${links.filter(l=>l.category==cat.id).length} links</div>
-      </div>`;
-    row.appendChild(head);
+    row.innerHTML = `
+      <div class="category-header">
+        <div class="cat-icon">${getIcon(cat.name)}</div>
+        <div>
+          <div class="cat-title">${cat.name}</div>
+          <div class="muted">${links.filter(l => l.category == cat.id).length} links</div>
+        </div>
+      </div>
+    `;
 
-    const cards=document.createElement("div");
-    cards.className="cards";
+    const cards = document.createElement("div");
+    cards.className = "cards";
 
-    links.filter(l=>l.category==cat.id).forEach(l=>{
-      const c=document.createElement("div");
-      c.className="card";
-      c.addEventListener("click",()=>window.open(l.url,"_blank"));
-      c.innerHTML=`
-        <div class="card-icon">${iconFor(cat.name)}</div>
+    links.filter(l => l.category == cat.id).forEach(l => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.onclick = () => window.open(l.url, "_blank");
+      card.innerHTML = `
         <div class="card-title">${l.title}</div>
-        <div class="card-url">${l.url}</div>`;
-      cards.appendChild(c);
+        <div class="card-url">${l.url}</div>
+      `;
+      cards.appendChild(card);
     });
 
-    const add=document.createElement("div");
-    add.className="card add-card";
-    add.textContent="+";
-    add.onclick=()=>openLinkModal(cat.id);
-    cards.appendChild(add);
+    const add = document.createElement("div");
+    add.className = "card add-card";
+    add.textContent = "+";
+    add.onclick = () => openLinkModal(cat.id);
 
+    cards.appendChild(add);
     row.appendChild(cards);
     main.appendChild(row);
   });
 }
 
+
 /* MODAL */
-const modalB=document.getElementById("modalBackdrop");
-const modalC=document.getElementById("modalContent");
-function openModal(html){
-  modalC.innerHTML=html;
-  modalB.style.display="flex";
-}
-modalB.onclick=e=>{ if(e.target===modalB) closeModal(); }
-function closeModal(){ modalB.style.display="none"; }
+const backdrop = document.getElementById("modalBackdrop");
+const modalEl = document.getElementById("modalContent");
+
+const openModal = html => {
+  modalEl.innerHTML = html;
+  backdrop.style.display = "flex";
+};
+const closeModal = () => backdrop.style.display = "none";
+
+backdrop.onclick = e => { if(e.target === backdrop) closeModal(); };
+
 
 /* ADD CATEGORY */
-function openCatModal(){
+document.getElementById("btnAddCategory").onclick = () => {
   openModal(`
     <h3>Add Category</h3>
-    <input id="catName" placeholder="Category name" />
-    <div class="row"><button class="btn" id="saveCat">Save</button></div>
+    <input id="catName" placeholder="Category Name" />
+    <div class="row">
+      <button class="btn-primary" id="saveCat">Save</button>
+    </div>
   `);
-  document.getElementById("saveCat").onclick=()=>{
-    const name=document.getElementById("catName").value.trim();
-    if(!name) return alert("Enter name");
-    categories.push({id:uid(),name});
+
+  document.getElementById("saveCat").onclick = () => {
+    let name = document.getElementById("catName").value.trim();
+    if (!name) return alert("Enter category name");
+    categories.push({id: uid(), name});
     save(); closeModal(); render();
   };
-}
+};
+
 
 /* ADD LINK */
-function openLinkModal(catId){
-  const opts=categories.map(c=>`<option value="${c.id}" ${c.id==catId?"selected":""}>${c.name}</option>`).join("");
+function openLinkModal(catId) {
+  const opts = categories.map(c => `<option value="${c.id}" ${c.id==catId?"selected":""}>${c.name}</option>`).join("");
+
   openModal(`
     <h3>Add Link</h3>
     <input id="lTitle" placeholder="Title" />
-    <input id="lUrl" placeholder="https://..." />
+    <input id="lUrl" placeholder="https://example.com" />
     <select id="lCat">${opts}</select>
-    <div class="row"><button class="btn" id="saveLink">Save</button></div>
+    <div class="row">
+      <button class="btn-primary" id="saveLink">Save</button>
+    </div>
   `);
-  document.getElementById("saveLink").onclick=()=>{
-    const t=document.getElementById("lTitle").value.trim();
-    const u=document.getElementById("lUrl").value.trim();
-    const c=document.getElementById("lCat").value;
-    if(!t||!u) return alert("All fields required");
-    links.push({id:uid(),title:t,url:u,category:c});
+
+  document.getElementById("saveLink").onclick = () => {
+    let t = document.getElementById("lTitle").value.trim();
+    let u = document.getElementById("lUrl").value.trim();
+    let c = document.getElementById("lCat").value;
+    if(!t || !u) return alert("All fields required");
+    links.push({id: uid(), title: t, url: u, category: c});
     save(); closeModal(); render();
   };
 }
 
+document.getElementById("btnAddLink").onclick = () => openLinkModal(categories[0].id);
+
+
 /* DELETE MENU */
-function openDeleteModal(){
-  const catOpts=categories.map(c=>`<option value="${c.id}">${c.name}</option>`).join("");
-  const linkOpts=links.map(l=>`<option value="${l.id}">${l.title}</option>`).join("");
+document.getElementById("btnDelete").onclick = () => {
+  const catOpts = categories.map(c => `<option value="${c.id}">${c.name}</option>`).join("");
+  const linkOpts = links.map(l => `<option value="${l.id}">${l.title}</option>`).join("");
 
   openModal(`
     <h3>Delete</h3>
+    <label><input type="radio" name="dtype" value="cat" checked> Delete Category</label><br>
+    <label><input type="radio" name="dtype" value="link"> Delete Link</label>
 
-    <label><input type="radio" name="dtype" value="cat" checked /> Delete Category</label><br>
-    <label><input type="radio" name="dtype" value="link" /> Delete Link</label>
-
-    <div id="delSelectWrap" style="margin-top:12px;">
+    <div id="delWrap" style="margin-top:10px;">
       <select id="delSelect">${catOpts}</select>
     </div>
 
     <div class="row">
-      <button class="btn" style="background:#c0392b" id="doDelete">Delete</button>
+      <button class="btn-danger" id="doDelete">Delete</button>
     </div>
   `);
 
-  const radios=document.querySelectorAll("input[name='dtype']");
-  const wrap=document.getElementById("delSelectWrap");
-
-  radios.forEach(r=>{
-    r.onchange=()=>{
-      const type=document.querySelector("input[name='dtype']:checked").value;
-      wrap.innerHTML= type==="cat"
+  document.querySelectorAll("input[name=dtype]").forEach(r => {
+    r.onchange = () => {
+      const t = document.querySelector("input[name=dtype]:checked").value;
+      document.getElementById("delWrap").innerHTML =
+        t === "cat"
         ? `<select id="delSelect">${catOpts}</select>`
         : `<select id="delSelect">${linkOpts}</select>`;
     };
   });
 
-  document.getElementById("doDelete").onclick=()=>{
-    const type=document.querySelector("input[name='dtype']:checked").value;
-    const id=document.getElementById("delSelect").value;
+  document.getElementById("doDelete").onclick = () => {
+    const type = document.querySelector("input[name=dtype]:checked").value;
+    const id = document.getElementById("delSelect").value;
 
-    if(type==="cat"){
-      if(links.some(l=>l.category==id)){
+    if (type === "cat") {
+      if (links.some(l => l.category == id))
         return alert("Category not empty");
-      }
-      categories = categories.filter(c=>c.id!=id);
+      categories = categories.filter(c => c.id != id);
     } else {
-      links = links.filter(l=>l.id!=id);
+      links = links.filter(l => l.id != id);
     }
 
     save(); closeModal(); render();
   };
-}
+};
 
-/* EVENTS */
-document.getElementById("btnAddCategory").onclick=openCatModal;
-document.getElementById("btnAddGlobalLink").onclick=()=>openLinkModal(categories[0]?.id);
-document.getElementById("btnDeleteItem").onclick=openDeleteModal;
+
+/* EXPORT (XLSX or CSV) */
+document.getElementById("btnExport").onclick = () => {
+  const data = links.map(l => ({
+    Category: categories.find(c => c.id == l.category)?.name || "",
+    Title: l.title,
+    URL: l.url
+  }));
+
+  const ws = XLSX.utils.json_to_sheet(data);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, "Links");
+
+  XLSX.writeFile(wb, "DashboardLinks.xlsx");
+};
+
+
+/* IMPORT */
+document.getElementById("btnImport").onclick = () => {
+  const input = document.createElement("input");
+  input.type = "file";
+  input.accept = ".csv,.xlsx";
+
+  input.onchange = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = (evt) => {
+      const wb = XLSX.read(evt.target.result, {type: "binary"});
+      const ws = wb.Sheets[wb.SheetNames[0]];
+      const rows = XLSX.utils.sheet_to_json(ws);
+
+      // Reset
+      links = [];
+      rows.forEach(r => {
+        const catName = r.Category?.trim();
+        let cat = categories.find(c => c.name.toLowerCase() === catName.toLowerCase());
+        if (!cat) {
+          cat = {id: uid(), name: catName};
+          categories.push(cat);
+        }
+        links.push({
+          id: uid(),
+          title: r.Title,
+          url: r.URL,
+          category: cat.id
+        });
+      });
+
+      save(); render();
+      alert("Import successful!");
+    };
+
+    reader.readAsBinaryString(file);
+  };
+
+  input.click();
+};
 
 render();
 </script>
-
 </body>
 </html>
